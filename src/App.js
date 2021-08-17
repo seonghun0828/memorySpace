@@ -2,6 +2,7 @@ import React from 'react'; // {Component}
 // import { Route, Switch } from 'react-router-dom';
 import Navigation from './home/header/Navigation';
 import Spaces from './home/body/Spaces';
+import './App.css';
 // import { Home, About, Posts } from './pages';
 // import Menu from './components/Menu';
 // import Posts from './pages';

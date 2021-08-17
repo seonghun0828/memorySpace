@@ -1,0 +1,16 @@
+.nav-icon {
+  margin-left: 2rem;
+  font-size: 3rem;
+  cursor: pointer;
+}
+.nav-icon:hover {
+  background-color: rgb(233, 233, 233);
+}
+#file-browser {
+  display: none;
+}
+.search-icon {
+  background: none;
+  border: none;
+  padding: 0;
+}

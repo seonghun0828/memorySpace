@@ -1,0 +1,12 @@
+.nav-title {
+  display: flex;
+  align-items: center;
+}
+.memory-icon {
+  width: 2.3rem;
+  height: 2.7rem;
+  margin-right: 1rem;
+}
+.page-name {
+  font-size: 2.5rem;
+}
