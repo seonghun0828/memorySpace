@@ -1,24 +1,32 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Icons.css';
+
 const useSearch = () => {
-  const target = useRef();
-  const clickTarget = () => target.current.click();
-  return { target, clickTarget };
+  const browser = useRef();
+  const clickbrowser = () => browser.current.click();
+  return { browser, clickbrowser };
 };
 const Icons = () => {
-  const { target, clickTarget } = useSearch();
+  const { browser, clickbrowser } = useSearch();
   return (
     <div className="nav-icons">
-      <span className="nav-icon book-icon">📚</span>
-      <span className="nav-icon movie-icon">🎥</span>
-      <span className="nav-icon calendar-icon">🗓</span>
+      <Link to="./book">
+        <span className="nav-icon book-icon">📚</span>
+      </Link>
+      <Link to="./movie">
+        <span className="nav-icon movie-icon">🎥</span>
+      </Link>
+      <Link to="./calendar">
+        <span className="nav-icon calendar-icon">🗓</span>
+      </Link>
       <span>
-        <input type="file" id="file-browser" ref={target} />
+        <input type="file" id="file-browser" ref={browser} />
         <input
           type="button"
           value="🔍"
           className="nav-icon search-icon"
-          onClick={clickTarget}
+          onClick={clickbrowser}
         />
       </span>
     </div>
