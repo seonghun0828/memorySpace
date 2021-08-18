@@ -1,0 +1,22 @@
+.dropDown {
+  display: inline-block;
+  position: relative;
+}
+.dropDown_menu {
+  display: none;
+  position: absolute;
+  font-size: 2rem;
+  margin-top: 1vh;
+  width: 17vw;
+  height: 14vh;
+  padding: 1vw;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+.dropDown_element {
+  margin: 1vh 0;
+  cursor: pointer;
+}
+.show {
+  display: block;
+}

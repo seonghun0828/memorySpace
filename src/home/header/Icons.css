@@ -1,5 +1,9 @@
+.nav-icons {
+  display: flex;
+}
 .nav-icon {
-  margin-left: 2rem;
+  position: relative;
+  margin-right: 2rem;
   font-size: 3rem;
   cursor: pointer;
 }
