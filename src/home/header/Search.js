@@ -1,9 +1,7 @@
-import React, { useRef, useContext, useEffect, useState } from 'react';
+import React, { useRef, useContext, useEffect } from 'react';
 import { ContentsContext } from '../body/Spaces';
 import './Search.css';
 
-// 내컴퓨터 클릭하면 readFile 해서 contents-div child의 첫번째 div 안에 넣어야함.
-// contents-div만 가져오면 이 파일 안에서 다 가능
 // useEffect 안에 load 함수 넣기?
 
 const showOrHide = (menu) => {
@@ -14,8 +12,15 @@ const showOrHide = (menu) => {
 window.onclick = (event) => {
   const searchBtn = document.querySelector('.search-icon');
   const dropDown = document.querySelector('.dropDown_menu');
-  if (event.target !== searchBtn) {
-    dropDown.classList.remove('show');
+  const clicked = document.querySelector('.clicked-img');
+  const editMenu = document.querySelector('.edit-menu');
+  const editMenuArr = [editMenu, editMenu.children[0], editMenu.children[1]];
+  const isClickEditMenu = editMenuArr.some((ele) => ele === event.target);
+  if (event.target !== searchBtn) dropDown.classList.remove('show');
+  if (!clicked || isClickEditMenu) return; // target이 editMenu일 때는 함수 종료
+  if (event.target !== clicked) {
+    editMenu.classList.add('invisible');
+    clicked.classList.remove('clicked-img');
   }
 };
 
@@ -43,7 +48,9 @@ window.onclick = (event) => {
 const useBrowser = () => {
   const element = useRef();
   const clickbrowser = () => element.current.click();
-  const contents = useContext(ContentsContext); // undefined 안나오게 어캐하누
+  const contents = useContext(ContentsContext);
+  let bookList = [],
+    id_num = 0;
 
   const readBookFile = () => {
     const file = element.current.files[0];
@@ -64,19 +71,25 @@ const useBrowser = () => {
     const newImg = document.createElement('img');
     newDiv.appendChild(newImg);
     newDiv.classList.add('img-div');
-    //   newImg.id = ++id_num;
+    newImg.id = ++id_num;
     newImg.src = img_url;
     newImg.classList.add('book-img');
-    //   newImg.addEventListener('click', clickHandler);
+    newImg.addEventListener('click', clickHandler);
     if (typeof img_memo === 'undefined') img_memo = '';
-    //   obj = {
-    //     id: id_num,
-    //     data: img_url,
-    //     memo: img_memo,
-    //   };
-    // bookList.push(obj);
+    const obj = {
+      id: id_num,
+      data: img_url,
+      memo: img_memo,
+    };
+    bookList.push(obj);
     //   saveBook();
     bookDiv.appendChild(newDiv);
+  };
+  const clickHandler = (event) => {
+    const editMenu = document.querySelector('.edit-menu');
+    event.target.parentNode.appendChild(editMenu);
+    event.target.classList.toggle('clicked-img');
+    editMenu.classList.toggle('invisible');
   };
 
   useEffect(() => {
@@ -90,9 +103,6 @@ const Search = () => {
   const { element, clickbrowser } = useBrowser();
   const dropDown_menu = useRef();
   const checking = showOrHide(dropDown_menu);
-  //   const contents = useContext(ContentsContext); // undefined 안나오게 어캐하누
-
-  // setState에 browser를 넣어서 바뀌면 리렌더링
 
   return (
     <div className="dropDown">

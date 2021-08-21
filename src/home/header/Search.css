@@ -21,6 +21,8 @@
   display: block;
 }
 .img-div {
+  display: inline-block;
+  position: relative;
   width: 8rem;
   height: 11rem;
   margin: 0.7rem;
@@ -32,4 +34,22 @@
   /* position: absolute; */
   border: 0.1rem solid rgb(209, 209, 209);
   z-index: 1;
+}
+.edit-menu {
+  position: absolute;
+  z-index: 2;
+  font-size: 2rem;
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.clicked-img {
+  z-index: 1;
+  transition-duration: 0.5s;
+  -webkit-filter: blur(1px) opacity(0.3) drop-shadow(0 0 0 white);
+  filter: blur(1px) opacity(0.3) drop-shadow(0 0 0 white);
+}
+.invisible {
+  display: none;
 }
