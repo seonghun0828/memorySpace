@@ -17,8 +17,10 @@ const clickHandler = (event) => {
   editMenu.classList.toggle('invisible');
 };
 
-const addBook = (img_url, img_memo) => {
+const addBook = (img_url, img_memo, list, id) => {
   // const bookDiv = contents.content.current.children[0];
+  if (list) bookList = list;
+  //   if (id !== undefined) id_num = id;
   const contents = document.querySelector('.contents-div');
   if (!contents) return;
   const bookDiv = contents.children[0];
@@ -49,9 +51,11 @@ const loadImg = () => {
   // if(localStorage.getItem("book") !== null || localStorage.getItem("movie") !== null)
   const book_data = JSON.parse(localStorage.getItem('book')),
     movie_data = JSON.parse(localStorage.getItem('movie'));
+  let newList = [];
+  let newId = 0;
   if (book_data !== null) {
     book_data.forEach((a) => {
-      addBook(a.data, a.memo);
+      addBook(a.data, a.memo, newList, newId);
     });
   }
   // if (movie_data !== null) {

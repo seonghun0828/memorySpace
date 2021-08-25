@@ -11,7 +11,7 @@ const useLoad = () => {
 
 const BookSpace = () => {
   const { loadFunction } = useLoad();
-  return <div className="book-div">book</div>;
+  return <div className="book-div"></div>;
 };
 
 export default BookSpace;
