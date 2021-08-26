@@ -2,7 +2,7 @@ import React, { useRef, createContext, useEffect } from 'react';
 import './Search.css';
 
 let bookList = [];
-// movieList = [];
+let movieList = [];
 let id_num = 0;
 
 const showOrHide = (menu) => {
@@ -17,9 +17,40 @@ const clickHandler = (event) => {
   editMenu.classList.toggle('invisible');
 };
 
+const addMovie = (img_url, img_memo, list, id) => {
+  if (list !== undefined) {
+    console.log(list);
+    movieList = list;
+  }
+  //   if (id !== undefined) id_num = id;
+  const contents = document.querySelector('.contents-div');
+  if (!contents) return;
+  const movieDiv = contents.children[0];
+  const newDiv = document.createElement('div');
+  const newImg = document.createElement('img');
+  newDiv.appendChild(newImg);
+  newDiv.classList.add('img-div');
+  newImg.id = ++id_num;
+  newImg.src = img_url;
+  newImg.classList.add('movie-img');
+  newImg.addEventListener('click', clickHandler);
+  if (typeof img_memo === 'undefined') img_memo = '';
+  const obj = {
+    id: id_num,
+    data: img_url,
+    memo: img_memo,
+  };
+  movieList.push(obj);
+  saveImg('movie', movieList);
+  movieDiv.appendChild(newDiv);
+};
+
 const addBook = (img_url, img_memo, list, id) => {
-  // const bookDiv = contents.content.current.children[0];
-  if (list) bookList = list;
+  //   console.log(list);
+  if (list !== undefined) {
+    // console.log(list);
+    bookList = list;
+  }
   //   if (id !== undefined) id_num = id;
   const contents = document.querySelector('.contents-div');
   if (!contents) return;
@@ -48,21 +79,30 @@ const saveImg = (arg, list) => {
 };
 
 const loadImg = () => {
-  // if(localStorage.getItem("book") !== null || localStorage.getItem("movie") !== null)
-  const book_data = JSON.parse(localStorage.getItem('book')),
-    movie_data = JSON.parse(localStorage.getItem('movie'));
-  let newList = [];
+  const contents = document.querySelector('.contents-div');
+  if (!contents) return;
+  const content = contents.children[0]; // book-div or movie-div
   let newId = 0;
-  if (book_data !== null) {
-    book_data.forEach((a) => {
-      addBook(a.data, a.memo, newList, newId);
-    });
+  if (content.classList.contains('book-div')) {
+    const book_data = JSON.parse(localStorage.getItem('book'));
+    let newBookList = [];
+    if (book_data !== null) {
+      book_data.forEach((a) => {
+        addBook(a.data, a.memo, newBookList, newId);
+      });
+    }
   }
-  // if (movie_data !== null) {
-  //   movie_data.forEach((a) => {
-  //     addMovie(a.data, a.memo);
-  //   });
-  // }
+  if (content.classList.contains('movie-div')) {
+    const movie_data = JSON.parse(localStorage.getItem('movie'));
+    let newMovieList = [];
+    if (movie_data !== null) {
+      movie_data.forEach((a) => {
+        addMovie(a.data, a.memo, newMovieList, newId);
+      });
+    }
+  }
+  //   console.log('newlist: ', newBookList); // 왜 빈 리스트가 아니냐?
+  //   console.log('newlist: ', newMovieList); // 왜 빈 리스트가 아니냐?
   // memoBtn.addEventListener('click', openMemo);
   // deleteBtn.addEventListener('click', deleteImg);
 };
@@ -86,7 +126,11 @@ const useBrowser = () => {
   const element = useRef();
   const clickbrowser = () => element.current.click();
 
-  const readBookFile = () => {
+  const readFile = () => {
+    const contents = document.querySelector('.contents-div');
+    if (!contents) return;
+    const content = contents.children[0]; // book-div or movie-div
+
     const file = element.current.files[0];
     if (!file) return;
     if (!file.type.startsWith('image/') && file !== null)
@@ -94,15 +138,16 @@ const useBrowser = () => {
     else {
       const reader = new FileReader();
       reader.onload = function () {
-        addBook(reader.result);
+        if (content.classList.contains('book-div')) addBook(reader.result);
+        if (content.classList.contains('movie-div')) addMovie(reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
 
   useEffect(() => {
-    element.current.addEventListener('change', readBookFile);
-    return () => element.current.removeEventListener('change', readBookFile);
+    element.current.addEventListener('change', readFile);
+    return () => element.current.removeEventListener('change', readFile);
   }, []);
   return { element, clickbrowser };
 };
