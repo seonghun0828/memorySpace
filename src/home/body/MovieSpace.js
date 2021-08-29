@@ -1,32 +1,27 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { LoadFunctionContext } from '../header/Search';
+import { Link } from 'react-router-dom';
 
 const useLoad = () => {
   const loadFunction = useContext(LoadFunctionContext);
+  const [memo, setMemo] = useState('');
   useEffect(() => {
     loadFunction.loadImg();
   }, []);
-  // return loadFunction;
+  return { memo, setMemo, loadFunction };
 };
 
 const MovieSpace = () => {
+  // const { memo, setMemo, loadFunction } = useLoad();
   useLoad();
-  // const { loadFunction } = useLoad();
   return (
     <div className="movie-div">
       <span className="edit-menu invisible">
-        <span className="memo-btn">✏️</span>
+        <Link to="./memo">
+          <span className="memo-btn">✏️</span>
+        </Link>
         <span className="delete-btn">🗑</span>
       </span>
-      <div className="memo-div invisible">
-        <div className="memo-nav">
-          <span className="close-btn">☒</span>
-          <span className="save-btn">☑︎</span>
-        </div>
-        <div className="memo-space">
-          <textarea spellCheck="false"></textarea>
-        </div>
-      </div>
     </div>
   );
 };

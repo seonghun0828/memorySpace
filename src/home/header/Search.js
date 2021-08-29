@@ -26,13 +26,13 @@ const saveMemo = () => {
   const movie_data = JSON.parse(localStorage.getItem('movie'));
   const targetImg = document.querySelector('.clicked-img');
   const contents = document.querySelector('.contents-div');
-  const memoSpace = document.querySelector('.memo-space');
+  const memoSpace = document.querySelector('.memo-space').children[0];
   if (!targetImg || !contents) return;
   if (contents.children[0].classList.contains('book-div')) {
     const index = Object.keys(book_data).find(
       (key) => book_data[key].id === parseInt(targetImg.id)
     );
-    console.log('fuck', memoSpace.value);
+    console.log(memoSpace.value);
     book_data[index].memo = memoSpace.value;
     bookList = book_data;
     saveImg('book', bookList);
@@ -46,8 +46,12 @@ const saveMemo = () => {
   }
 };
 const closeMemo = () => {
-  // targetImg.classList.remove('clicked-img');
+  const targetImg = document.querySelector('.clicked-img');
   const memoDiv = document.querySelector('.memo-div');
+  const editMenu = document.querySelector('.edit-menu');
+  if (!targetImg || !memoDiv || !editMenu) return;
+  targetImg.classList.remove('clicked-img');
+  targetImg.parentNode.removeChild(editMenu);
   memoDiv.classList.add('invisible');
 };
 
@@ -58,8 +62,8 @@ const openMemo = () => {
   const contents = document.querySelector('.contents-div');
   const memoSpace = document.querySelector('.memo-space'),
     memoDiv = document.querySelector('.memo-div'),
-    closeBtn = document.querySelector('.close-btn'),
-    saveBtn = document.querySelector('.save-btn');
+    closeBtn = document.querySelector('.close-btn');
+  // saveBtn = document.querySelector('.save-btn');
   if (!targetImg || !contents) return;
   if (contents.children[0].classList.contains('book-div')) {
     const index = Object.keys(book_data).find(
@@ -168,19 +172,19 @@ const loadImg = () => {
 window.onclick = (event) => {
   const searchBtn = document.querySelector('.search-icon');
   const dropDown = document.querySelector('.dropDown_menu');
-  const clicked = document.querySelector('.clicked-img');
+  const targetImg = document.querySelector('.clicked-img');
   const editMenu = document.querySelector('.edit-menu');
-  const memoDiv = document.querySelector('memo-div');
+  const memoDiv = document.querySelector('.memo-div');
   if (event.target !== searchBtn) dropDown.classList.remove('show');
   if (!editMenu || !memoDiv) return;
   const editMenuArr = [editMenu, editMenu.children[0], editMenu.children[1]];
   const memoDivArr = [memoDiv, memoDiv.children[0], memoDiv.children[1]];
   const isClickEditMenu = editMenuArr.some((ele) => ele === event.target);
   const isClickMemoDiv = memoDivArr.some((ele) => ele === event.target);
-  if (!clicked || isClickEditMenu || isClickMemoDiv) return; // target이 editMenu일 때는 함수 종료
-  if (event.target !== clicked) {
+  if (!targetImg || isClickEditMenu || isClickMemoDiv) return; // target이 editMenu일 때는 함수 종료
+  if (event.target !== targetImg) {
     editMenu.classList.add('invisible');
-    clicked.classList.remove('clicked-img');
+    targetImg.classList.remove('clicked-img');
   }
 };
 

@@ -1,0 +1,33 @@
+.memo-div {
+  display: inline-block;
+  float: right;
+  width: 30vw;
+  height: 85vh;
+  background-color: rgb(218, 218, 218);
+  /* border-left: 1px solid grey; */
+}
+.invisible {
+  display: none;
+}
+.memo-nav {
+  padding-left: 1rem;
+  font-size: 2rem;
+  border-bottom: 0.1rem solid white;
+}
+.memo-nav .save-btn,
+.close-btn {
+  cursor: pointer;
+}
+.memo-space {
+  width: 100%;
+  height: 45rem;
+}
+.memo-space textarea {
+  border: none;
+  background: none;
+  outline: none;
+  width: inherit;
+  height: inherit;
+  overflow-y: auto;
+  /* padding-left: 10px; */
+}

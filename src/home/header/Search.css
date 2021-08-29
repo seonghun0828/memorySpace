@@ -50,18 +50,18 @@
   -webkit-filter: blur(1px) opacity(0.3) drop-shadow(0 0 0 white);
   filter: blur(1px) opacity(0.3) drop-shadow(0 0 0 white);
 }
-.memo-div {
+/* .memo-div {
   display: inline-block;
   float: right;
   width: 30vw;
   height: 85vh;
   background-color: rgb(218, 218, 218);
   /* border-left: 1px solid grey; */
-}
+/* } */
 .invisible {
   display: none;
 }
-.memo-nav {
+/* .memo-nav {
   padding-left: 1rem;
   font-size: 2rem;
   border-bottom: 0.1rem solid white;
@@ -82,4 +82,4 @@
   height: inherit;
   overflow-y: auto;
   /* padding-left: 10px; */
-}
+/* } */
