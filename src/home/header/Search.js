@@ -12,14 +12,73 @@ const showOrHide = (menu) => {
 
 const clickHandler = (event) => {
   const editMenu = document.querySelector('.edit-menu');
+  if (!editMenu) return;
+  // 이미 어느 img가 클릭 되어 edit menu가 보이는 상태면 함수 종료
+  if (!editMenu.classList.contains('invisible')) return;
   event.target.parentNode.appendChild(editMenu);
   event.target.classList.toggle('clicked-img');
   editMenu.classList.toggle('invisible');
 };
 
+const handleMemo = () => {};
+const saveMemo = () => {
+  const book_data = JSON.parse(localStorage.getItem('book'));
+  const movie_data = JSON.parse(localStorage.getItem('movie'));
+  const targetImg = document.querySelector('.clicked-img');
+  const contents = document.querySelector('.contents-div');
+  const memoSpace = document.querySelector('.memo-space');
+  if (!targetImg || !contents) return;
+  if (contents.children[0].classList.contains('book-div')) {
+    const index = Object.keys(book_data).find(
+      (key) => book_data[key].id === parseInt(targetImg.id)
+    );
+    console.log('fuck', memoSpace.value);
+    book_data[index].memo = memoSpace.value;
+    bookList = book_data;
+    saveImg('book', bookList);
+  } else {
+    const index = Object.keys(movie_data).find(
+      (key) => movie_data[key].id === parseInt(targetImg.id)
+    );
+    movie_data[index].memo = memoSpace.value;
+    movieList = movie_data;
+    saveImg('movie', movieList);
+  }
+};
+const closeMemo = () => {
+  // targetImg.classList.remove('clicked-img');
+  const memoDiv = document.querySelector('.memo-div');
+  memoDiv.classList.add('invisible');
+};
+
+const openMemo = () => {
+  const book_data = JSON.parse(localStorage.getItem('book')),
+    movie_data = JSON.parse(localStorage.getItem('movie'));
+  const targetImg = document.querySelector('.clicked-img');
+  const contents = document.querySelector('.contents-div');
+  const memoSpace = document.querySelector('.memo-space'),
+    memoDiv = document.querySelector('.memo-div'),
+    closeBtn = document.querySelector('.close-btn'),
+    saveBtn = document.querySelector('.save-btn');
+  if (!targetImg || !contents) return;
+  if (contents.children[0].classList.contains('book-div')) {
+    const index = Object.keys(book_data).find(
+      (key) => book_data[key].id === parseInt(targetImg.id)
+    );
+    memoSpace.value = book_data[index].memo;
+  } else {
+    const index = Object.keys(movie_data).find(
+      (key) => movie_data[key].id === parseInt(targetImg.id)
+    );
+    memoSpace.value = movie_data[index].memo;
+  }
+  memoDiv.classList.remove('invisible');
+  closeBtn.addEventListener('click', closeMemo);
+  // saveBtn.addEventListener('click', saveMemo);
+};
+
 const addMovie = (img_url, img_memo, list, id) => {
   if (list !== undefined) {
-    console.log(list);
     movieList = list;
   }
   //   if (id !== undefined) id_num = id;
@@ -46,9 +105,7 @@ const addMovie = (img_url, img_memo, list, id) => {
 };
 
 const addBook = (img_url, img_memo, list, id) => {
-  //   console.log(list);
   if (list !== undefined) {
-    // console.log(list);
     bookList = list;
   }
   //   if (id !== undefined) id_num = id;
@@ -80,6 +137,7 @@ const saveImg = (arg, list) => {
 
 const loadImg = () => {
   const contents = document.querySelector('.contents-div');
+  const memoBtn = document.querySelector('.memo-btn');
   if (!contents) return;
   const content = contents.children[0]; // book-div or movie-div
   let newId = 0;
@@ -103,7 +161,7 @@ const loadImg = () => {
   }
   //   console.log('newlist: ', newBookList); // 왜 빈 리스트가 아니냐?
   //   console.log('newlist: ', newMovieList); // 왜 빈 리스트가 아니냐?
-  // memoBtn.addEventListener('click', openMemo);
+  memoBtn.addEventListener('click', openMemo);
   // deleteBtn.addEventListener('click', deleteImg);
 };
 
@@ -112,10 +170,14 @@ window.onclick = (event) => {
   const dropDown = document.querySelector('.dropDown_menu');
   const clicked = document.querySelector('.clicked-img');
   const editMenu = document.querySelector('.edit-menu');
-  const editMenuArr = [editMenu, editMenu.children[0], editMenu.children[1]];
-  const isClickEditMenu = editMenuArr.some((ele) => ele === event.target);
+  const memoDiv = document.querySelector('memo-div');
   if (event.target !== searchBtn) dropDown.classList.remove('show');
-  if (!clicked || isClickEditMenu) return; // target이 editMenu일 때는 함수 종료
+  if (!editMenu || !memoDiv) return;
+  const editMenuArr = [editMenu, editMenu.children[0], editMenu.children[1]];
+  const memoDivArr = [memoDiv, memoDiv.children[0], memoDiv.children[1]];
+  const isClickEditMenu = editMenuArr.some((ele) => ele === event.target);
+  const isClickMemoDiv = memoDivArr.some((ele) => ele === event.target);
+  if (!clicked || isClickEditMenu || isClickMemoDiv) return; // target이 editMenu일 때는 함수 종료
   if (event.target !== clicked) {
     editMenu.classList.add('invisible');
     clicked.classList.remove('clicked-img');
@@ -154,6 +216,7 @@ const useBrowser = () => {
 
 const loadFunction = {
   loadImg,
+  saveMemo,
 };
 
 export const LoadFunctionContext = createContext(loadFunction);

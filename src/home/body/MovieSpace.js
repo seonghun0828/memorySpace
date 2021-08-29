@@ -6,12 +6,29 @@ const useLoad = () => {
   useEffect(() => {
     loadFunction.loadImg();
   }, []);
-  return loadFunction;
+  // return loadFunction;
 };
 
 const MovieSpace = () => {
-  const { loadFunction } = useLoad();
-  return <div className="movie-div"></div>;
+  useLoad();
+  // const { loadFunction } = useLoad();
+  return (
+    <div className="movie-div">
+      <span className="edit-menu invisible">
+        <span className="memo-btn">✏️</span>
+        <span className="delete-btn">🗑</span>
+      </span>
+      <div className="memo-div invisible">
+        <div className="memo-nav">
+          <span className="close-btn">☒</span>
+          <span className="save-btn">☑︎</span>
+        </div>
+        <div className="memo-space">
+          <textarea spellCheck="false"></textarea>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default MovieSpace;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MemoSpace = () => {
-  return <div>memo</div>;
+  return <div></div>;
 };
 
 export default MemoSpace;

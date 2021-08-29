@@ -37,10 +37,6 @@ const Spaces = () => {
       <Route path="/movie" component={MovieSpace}></Route>
       <Route path="/calendar" component={CalendarSpace}></Route>
       <MemoSpace></MemoSpace>
-      <span className="edit-menu invisible">
-        <span className="memo-btn">✏️</span>
-        <span className="delete-btn">🗑</span>
-      </span>
     </div>
   );
 };
