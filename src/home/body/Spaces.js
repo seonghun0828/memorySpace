@@ -36,7 +36,7 @@ const Spaces = () => {
       <Route path="/book" component={BookSpace}></Route>
       <Route path="/movie" component={MovieSpace}></Route>
       <Route path="/calendar" component={CalendarSpace}></Route>
-      <MemoSpace></MemoSpace>
+      <Route path="/memo" component={MemoSpace}></Route>
     </div>
   );
 };
