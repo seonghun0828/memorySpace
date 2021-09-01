@@ -1,4 +1,4 @@
-import React, { useRef, createContext, useEffect } from 'react';
+import React, { useRef, createContext, useEffect, useState } from 'react';
 import './Search.css';
 
 let bookList = [];
@@ -151,12 +151,10 @@ window.onclick = (event) => {
 const useBrowser = () => {
   const element = useRef();
   const clickbrowser = () => element.current.click();
-
   const readFile = () => {
     const contents = document.querySelector('.contents-div');
     if (!contents) return;
     const content = contents.children[0]; // book-div or movie-div
-
     const file = element.current.files[0];
     if (!file) return;
     if (!file.type.startsWith('image/') && file !== null)
@@ -181,6 +179,7 @@ const useBrowser = () => {
 const loadFunction = {
   loadImg,
   // saveMemo,
+  clickHandler,
 };
 
 export const LoadFunctionContext = createContext(loadFunction);
