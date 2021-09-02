@@ -1,4 +1,5 @@
 import React, { useRef, createContext, useEffect, useState } from 'react';
+import { LoadImages } from '../body/LoadImages';
 import './Search.css';
 
 let bookList = [];
@@ -180,6 +181,8 @@ const loadFunction = {
   loadImg,
   // saveMemo,
   clickHandler,
+  addBook,
+  addMovie,
 };
 
 export const LoadFunctionContext = createContext(loadFunction);
