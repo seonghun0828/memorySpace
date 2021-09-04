@@ -6,9 +6,12 @@ const deleteImg = () => {
   if (window.confirm('삭제하시겠습니까?')) {
     const targetImg = document.querySelector('.clicked-img');
     const editMenu = document.querySelector('.edit-menu');
-    const parent = targetImg.parentNode;
+    const parent = targetImg.parentNode.parentNode;
     const data = JSON.parse(localStorage.getItem('book'));
-    parent.removeChild(targetImg);
+    while (parent.hasChildNodes()) {
+      parent.removeChild(parent.lastChild);
+    }
+    // parent.removeChild(targetImg.parentNode);
     const bookList = data.filter((a) => a.id !== parseInt(targetImg.id));
     localStorage.setItem('book', JSON.stringify(bookList));
     // const data = JSON.parse(localStorage.getItem('movie'));

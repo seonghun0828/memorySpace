@@ -3,28 +3,27 @@ import { LoadFunctionContext } from '../header/Search';
 // import { MemoSpace } from './';
 import { Link } from 'react-router-dom';
 import { DeleteImage } from './DeleteImage';
-import { LoadImages } from './LoadImages';
+import { Functions } from './Functions';
 
 const useLoad = () => {
   const loadFunction = useContext(LoadFunctionContext);
-  const [memo, setMemo] = useState('');
-
+  // const [memo, setMemo] = useState('');
   // const [num, setNum] = useState(-1);
 
+  const deleteImg = () => {
+    DeleteImage();
+    // return <LoadImages />;
+    Functions().loadImg();
+  };
   useEffect(() => {
     loadFunction.loadImg();
   }, [loadFunction]);
   // return { memo, setMemo, loadFunction };
-  return { loadFunction };
-};
-
-const deleteImg = () => {
-  DeleteImage();
-  <LoadImages />;
+  return { loadFunction, deleteImg };
 };
 
 const BookSpace = () => {
-  const { loadFunction } = useLoad();
+  const { loadFunction, deleteImg } = useLoad();
   // useLoad();
 
   return (
