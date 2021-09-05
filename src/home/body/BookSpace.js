@@ -11,9 +11,9 @@ const useLoad = () => {
   // const [num, setNum] = useState(-1);
 
   const deleteImg = () => {
-    DeleteImage();
-    // return <LoadImages />;
-    Functions().loadImg();
+    if (DeleteImage()) {
+      Functions().loadImg();
+    }
   };
   useEffect(() => {
     loadFunction.loadImg();

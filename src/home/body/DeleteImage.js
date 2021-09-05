@@ -7,19 +7,27 @@ const deleteImg = () => {
     const targetImg = document.querySelector('.clicked-img');
     const editMenu = document.querySelector('.edit-menu');
     const parent = targetImg.parentNode.parentNode;
-    const data = JSON.parse(localStorage.getItem('book'));
     while (parent.hasChildNodes()) {
       parent.removeChild(parent.lastChild);
     }
-    // parent.removeChild(targetImg.parentNode);
-    const bookList = data.filter((a) => a.id !== parseInt(targetImg.id));
-    localStorage.setItem('book', JSON.stringify(bookList));
+    if (parent.classList.contains('book-div')) {
+      const data = JSON.parse(localStorage.getItem('book'));
+      const bookList = data.filter((a) => a.id !== parseInt(targetImg.id));
+      localStorage.setItem('book', JSON.stringify(bookList));
+    }
+    if (parent.classList.contains('movie-div')) {
+      const data = JSON.parse(localStorage.getItem('movie'));
+      const movieList = data.filter((a) => a.id !== parseInt(targetImg.id));
+      localStorage.setItem('movie', JSON.stringify(movieList));
+    }
     // const data = JSON.parse(localStorage.getItem('movie'));
     // parent.removeChild(targetImg);
     // movieList = data.filter((a) => a.id !== parseInt(targetImg.id));
     // saveMovie();
     editMenu.classList.add('invisible');
-  }
+    parent.appendChild(editMenu);
+    return true;
+  } else return false;
 };
 
 // const useLoad = () => {
