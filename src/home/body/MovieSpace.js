@@ -1,17 +1,20 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { LoadFunctionContext } from '../header/Search';
+import React, { createContext, useEffect } from 'react';
+// import { LoadFunctionContext } from '../header/Search';
 // import MemoSpace from './MemoSpace';
 import { Link } from 'react-router-dom';
 import { DeleteImage } from './DeleteImage';
 import { Functions } from './Functions';
+import MemoSpace from './MemoSpace';
 
 const useLoad = () => {
-  const loadFunction = useContext(LoadFunctionContext);
-  const [memo, setMemo] = useState('');
+  // const loadFunction = useContext(LoadFunctionContext);
+  // const [memo, setMemo] = useState('');
   useEffect(() => {
-    loadFunction.loadImg();
-  }, [loadFunction]);
-  return { memo, setMemo, loadFunction };
+    // loadFunction.loadImg();
+    Functions().loadImg();
+  }, []);
+  // return { memo, setMemo, loadFunction };
+  return;
 };
 
 const deleteImg = () => {
@@ -20,12 +23,14 @@ const deleteImg = () => {
   }
 };
 
+export const ClickedImageContext = createContext();
+
 const MovieSpace = () => {
   // const { memo, setMemo, loadFunction } = useLoad();
   useLoad();
-  // const clickedImg = document.querySelector('.clicked-img');
-  // let img_id;
-  // if (clickedImg !== undefined && clickedImg !== null) img_id = clickedImg.id;
+  const clickedImg = document.querySelector('.clicked-img');
+  let img_id = -1;
+  if (clickedImg !== null) img_id = clickedImg.id;
   return (
     <div className="movie-div">
       <span className="edit-menu invisible">
@@ -34,7 +39,6 @@ const MovieSpace = () => {
             pathname: './memo',
             state: {
               category: 'movie',
-              // img_id,
             },
           }}
         >

@@ -193,9 +193,9 @@ const Search = () => {
 
   return (
     <div className="dropDown">
-      <LoadFunctionContext.Provider
+      {/* <LoadFunctionContext.Provider
         value={loadFunction}
-      ></LoadFunctionContext.Provider>
+      ></LoadFunctionContext.Provider> */}
 
       <input type="file" id="file-browser" ref={element} />
       <button className="nav-icon search-icon" onClick={checking}>

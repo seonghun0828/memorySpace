@@ -10,6 +10,8 @@ const clickHandler = (event) => {
   event.target.parentNode.appendChild(editMenu);
   event.target.classList.toggle('clicked-img');
   editMenu.classList.toggle('invisible');
+  const contentsDiv = event.target.parentNode.parentNode.parentNode;
+  contentsDiv.clicked_id = event.target.id;
 };
 
 const addMovie = (img_url, img_memo, list, id) => {
@@ -97,6 +99,7 @@ const loadImg = () => {
 
 const funcs = {
   loadImg,
+  saveImg,
 };
 
 export const Functions = () => {

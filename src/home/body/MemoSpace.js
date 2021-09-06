@@ -1,54 +1,45 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { LoadFunctionContext } from '../header/Search';
+import React, { useState, useEffect } from 'react';
+import { Functions } from './Functions';
 import './MemoSpace.css';
 
-let category = '';
-let img_id = '99999';
-const saveMemo = () => {
+const saveMemo = (category, id) => {
+  const contents = document.querySelector('.contents-div');
+  const memoSpace = document.querySelector('.memo-space').children[0];
+  if (!contents) return;
   if (category === 'book') {
     const book_data = JSON.parse(localStorage.getItem('book'));
+    const index = Object.keys(book_data).find(
+      (key) => book_data[key].id === parseInt(id)
+    );
+    console.log(memoSpace.value);
+    book_data[index].memo = memoSpace.value;
+    Functions().saveImg(category, book_data);
   } else {
     const movie_data = JSON.parse(localStorage.getItem('movie'));
+    const index = Object.keys(movie_data).find(
+      (key) => movie_data[key].id === parseInt(id)
+    );
+    movie_data[index].memo = memoSpace.value;
+    Functions().saveImg(category, movie_data);
   }
-  // const targetImg = document.querySelector('.clicked-img');
-  // const contents = document.querySelector('.contents-div');
-  // const memoSpace = document.querySelector('.memo-space').children[0];
-  // if (!targetImg || !contents) return;
-  // if (contents.children[0].classList.contains('book-div')) {
-  //   const index = Object.keys(book_data).find(
-  //     (key) => book_data[key].id === parseInt(targetImg.id)
-  //   );
-  //   console.log(memoSpace.value);
-  //   book_data[index].memo = memoSpace.value;
-  //   bookList = book_data;
-  //   saveImg('book', bookList);
-  // } else {
-  //   const index = Object.keys(movie_data).find(
-  //     (key) => movie_data[key].id === parseInt(targetImg.id)
-  //   );
-  //   movie_data[index].memo = memoSpace.value;
-  //   movieList = movie_data;
-  //   saveImg('movie', movieList);
-  // }
-  console.log(img_id);
+
+  if (contents.children[0].classList.contains('book-div')) {
+  } else {
+  }
 };
 
 const useLoad = () => {
-  const loadFunction = useContext(LoadFunctionContext);
   const [memo, setMemo] = useState('');
-  useEffect(() => {
-    // save 기능 구현 하고 나서 지워보고 필요 없으면 지우기
-    loadFunction.loadImg();
-  }, [loadFunction]);
-  return { memo, setMemo, loadFunction };
+  return { memo, setMemo };
 };
 
 const MemoSpace = (props) => {
-  const { memo, setMemo, loadFunction } = useLoad();
+  const { memo, setMemo } = useLoad();
   const prop_state = props.location.state;
-  if (prop_state !== undefined) {
-    category = prop_state.category;
-    img_id = prop_state.img_id;
+  const category = prop_state.category;
+  let id;
+  if (document.querySelector('.contents-div')) {
+    id = document.querySelector('.contents-div').clicked_id;
   }
   return (
     <div className="memo-div">
@@ -56,7 +47,7 @@ const MemoSpace = (props) => {
         <span className="close-btn" onClick={props.history.goBack}>
           ☒
         </span>
-        <span className="save-btn" onClick={saveMemo}>
+        <span className="save-btn" onClick={() => saveMemo(category, id)}>
           ☑︎
         </span>
       </div>
