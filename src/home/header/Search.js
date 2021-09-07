@@ -1,4 +1,4 @@
-import React, { useRef, createContext, useEffect, useState } from 'react';
+import React, { useRef, createContext, useEffect } from 'react';
 import './Search.css';
 
 let bookList = [];
@@ -137,6 +137,7 @@ window.onclick = (event) => {
   const dropDown = document.querySelector('.dropDown_menu');
   const targetImg = document.querySelector('.clicked-img');
   const editMenu = document.querySelector('.edit-menu');
+  if (!searchBtn && !dropDown) return;
   if (event.target !== searchBtn) dropDown.classList.remove('show');
   if (!editMenu) return;
   const editMenuArr = [editMenu, editMenu.children[0], editMenu.children[1]];

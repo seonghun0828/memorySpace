@@ -1,30 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { LoadFunctionContext } from '../header/Search';
-// import { MemoSpace } from './';
+import React, { useEffect } from 'react';
+// import { LoadFunctionContext } from '../header/Search';
 import { Link } from 'react-router-dom';
 import { DeleteImage } from './DeleteImage';
 import { Functions } from './Functions';
 
-const useLoad = () => {
-  const loadFunction = useContext(LoadFunctionContext);
-  // const [memo, setMemo] = useState('');
-  // const [num, setNum] = useState(-1);
-
-  const deleteImg = () => {
-    if (DeleteImage()) {
-      Functions().loadImg();
-    }
-  };
-  useEffect(() => {
-    loadFunction.loadImg();
-  }, [loadFunction]);
-  // return { memo, setMemo, loadFunction };
-  return { loadFunction, deleteImg };
+const deleteImg = () => {
+  if (DeleteImage()) {
+    Functions().loadImg();
+  }
 };
 
 const BookSpace = () => {
-  const { loadFunction, deleteImg } = useLoad();
-  // useLoad();
+  useEffect(() => {
+    Functions().loadImg();
+  }, []);
 
   return (
     <div className="book-div">

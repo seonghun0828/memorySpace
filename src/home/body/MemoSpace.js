@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Functions } from './Functions';
 import './MemoSpace.css';
 
@@ -11,7 +11,6 @@ const saveMemo = (category, id) => {
     const index = Object.keys(book_data).find(
       (key) => book_data[key].id === parseInt(id)
     );
-    console.log(memoSpace.value);
     book_data[index].memo = memoSpace.value;
     Functions().saveImg(category, book_data);
   } else {
@@ -22,41 +21,37 @@ const saveMemo = (category, id) => {
     movie_data[index].memo = memoSpace.value;
     Functions().saveImg(category, movie_data);
   }
-
-  if (contents.children[0].classList.contains('book-div')) {
-  } else {
-  }
 };
 
-const useLoad = () => {
-  const [memo, setMemo] = useState('');
-  return { memo, setMemo };
+const readMemo = (category, id) => {
+  const memoSpace = document.querySelector('.memo-space');
+  if (!memoSpace) return;
+  const textArea = memoSpace.children[0];
+  const data = JSON.parse(localStorage.getItem(category));
+  const index = Object.keys(data).find((key) => data[key].id === parseInt(id));
+  textArea.value = data[index].memo;
 };
 
 const MemoSpace = (props) => {
-  const { memo, setMemo } = useLoad();
   const prop_state = props.location.state;
   const category = prop_state.category;
-  let id;
-  if (document.querySelector('.contents-div')) {
-    id = document.querySelector('.contents-div').clicked_id;
-  }
+  useEffect(() => {
+    const id = document.querySelector('.contents-div').clicked_id;
+    const saveBtn = document.querySelector('.save-btn');
+    readMemo(category, id);
+    saveBtn.addEventListener('click', () => saveMemo(category, id));
+    return saveBtn.removeEventListener('click', () => saveMemo(category, id));
+  });
   return (
     <div className="memo-div">
       <div className="memo-nav">
         <span className="close-btn" onClick={props.history.goBack}>
           ☒
         </span>
-        <span className="save-btn" onClick={() => saveMemo(category, id)}>
-          ☑︎
-        </span>
+        <span className="save-btn">☑︎</span>
       </div>
       <div className="memo-space">
-        <textarea
-          value={memo}
-          spellCheck="false"
-          onChange={(e) => setMemo(e.target.value)}
-        ></textarea>
+        <textarea spellCheck="false"></textarea>
       </div>
     </div>
   );
