@@ -17,6 +17,9 @@
 .close-btn {
   cursor: pointer;
 }
+.savingMemoAlarm {
+  font-size: 1.4rem;
+}
 .memo-space {
   width: 100%;
   height: calc(100% - 3rem);

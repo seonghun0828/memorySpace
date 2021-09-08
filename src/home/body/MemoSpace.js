@@ -2,6 +2,19 @@ import React, { useEffect } from 'react';
 import { Functions } from './Functions';
 import './MemoSpace.css';
 
+const removeAlarm = (memoNav) => {
+  memoNav.removeChild(memoNav.lastChild);
+};
+const addAlarm = () => {
+  const memoNav = document.querySelector('.memo-nav');
+  if (memoNav.childNodes.length !== 4) return;
+  const alarm = document.createElement('span');
+  alarm.classList.add('savingMemoAlarm');
+  alarm.innerText = '저장되었습니다';
+  memoNav.appendChild(alarm);
+  setTimeout(() => removeAlarm(memoNav), 2000);
+};
+
 const saveMemo = (category, id) => {
   const contents = document.querySelector('.contents-div');
   const memoSpace = document.querySelector('.memo-space').children[0];
@@ -21,11 +34,11 @@ const saveMemo = (category, id) => {
     movie_data[index].memo = memoSpace.value;
     Functions().saveImg(category, movie_data);
   }
+  addAlarm();
 };
 
 const readMemo = (category, id) => {
   const memoSpace = document.querySelector('.memo-space');
-  if (!memoSpace) return;
   const textArea = memoSpace.children[0];
   const data = JSON.parse(localStorage.getItem(category));
   const index = Object.keys(data).find((key) => data[key].id === parseInt(id));
@@ -48,7 +61,9 @@ const MemoSpace = (props) => {
         <span className="close-btn" onClick={props.history.goBack}>
           ☒
         </span>
+        &nbsp;&nbsp;
         <span className="save-btn">☑︎</span>
+        &nbsp;&nbsp;
       </div>
       <div className="memo-space">
         <textarea spellCheck="false"></textarea>
