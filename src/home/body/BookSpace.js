@@ -3,6 +3,20 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { DeleteImage } from './DeleteImage';
 import { Functions } from './Functions';
+import axios from 'axios';
+
+const getApi = async () => {
+  const key = '45fe65b5c3fbd3d400ad5daa0f415552';
+  const res = await axios.get('https://dapi.kakao.com/v3/search/book', {
+    params: {
+      query: '경제',
+    },
+    headers: {
+      Authorization: 'KakaoAK ' + key,
+    },
+  });
+  console.log(res.data.documents);
+};
 
 const deleteImg = () => {
   if (DeleteImage()) {
@@ -13,6 +27,9 @@ const deleteImg = () => {
 const BookSpace = () => {
   useEffect(() => {
     Functions().loadImg();
+    const nBook = document.querySelector('.dropDown-book');
+    nBook.addEventListener('click', getApi);
+    return () => nBook.removeEventListener('click', getApi);
   }, []);
 
   return (

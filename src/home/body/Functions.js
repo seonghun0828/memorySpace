@@ -1,7 +1,3 @@
-let bookList = [];
-let movieList = [];
-let id_num = 0;
-
 const clickHandler = (event) => {
   const editMenu = document.querySelector('.edit-menu');
   if (!editMenu) return;
@@ -14,11 +10,10 @@ const clickHandler = (event) => {
   contentsDiv.clicked_id = event.target.id;
 };
 
-const addMovie = (img_url, img_memo, list, id) => {
-  if (list !== undefined) {
-    movieList = list;
-  }
-  //   if (id !== undefined) id_num = id;
+const addMovie = (img_url, movieList, img_memo) => {
+  let id_num;
+  if (movieList.length === 0) id_num = 0;
+  else id_num = movieList[movieList.length - 1].id + 1;
   const contents = document.querySelector('.contents-div');
   if (!contents) return;
   const movieDiv = contents.children[0];
@@ -26,7 +21,7 @@ const addMovie = (img_url, img_memo, list, id) => {
   const newImg = document.createElement('img');
   newDiv.appendChild(newImg);
   newDiv.classList.add('img-div');
-  newImg.id = ++id_num;
+  newImg.id = id_num;
   newImg.src = img_url;
   newImg.classList.add('movie-img');
   newImg.addEventListener('click', clickHandler);
@@ -41,11 +36,10 @@ const addMovie = (img_url, img_memo, list, id) => {
   movieDiv.appendChild(newDiv);
 };
 
-const addBook = (img_url, img_memo, list, id) => {
-  if (list !== undefined) {
-    bookList = list;
-  }
-  //   if (id !== undefined) id_num = id;
+const addBook = (img_url, bookList, img_memo) => {
+  let id_num;
+  if (bookList.length === 0) id_num = 0;
+  else id_num = bookList[bookList.length - 1].id + 1;
   const contents = document.querySelector('.contents-div');
   if (!contents) return;
   const bookDiv = contents.children[0];
@@ -53,7 +47,7 @@ const addBook = (img_url, img_memo, list, id) => {
   const newImg = document.createElement('img');
   newDiv.appendChild(newImg);
   newDiv.classList.add('img-div');
-  newImg.id = ++id_num;
+  newImg.id = id_num;
   newImg.src = img_url;
   newImg.classList.add('book-img');
   newImg.addEventListener('click', clickHandler);
@@ -76,22 +70,21 @@ const loadImg = () => {
   const contents = document.querySelector('.contents-div');
   if (!contents) return;
   const content = contents.children[0]; // book-div or movie-div
-  let newId = 0;
   if (content.classList.contains('book-div')) {
     const book_data = JSON.parse(localStorage.getItem('book'));
-    let newBookList = [];
     if (book_data !== null) {
+      const bookList = [];
       book_data.forEach((a) => {
-        addBook(a.data, a.memo, newBookList, newId);
+        addBook(a.data, bookList, a.memo);
       });
     }
   }
   if (content.classList.contains('movie-div')) {
     const movie_data = JSON.parse(localStorage.getItem('movie'));
-    let newMovieList = [];
     if (movie_data !== null) {
+      const movieList = [];
       movie_data.forEach((a) => {
-        addMovie(a.data, a.memo, newMovieList, newId);
+        addMovie(a.data, movieList, a.memo);
       });
     }
   }

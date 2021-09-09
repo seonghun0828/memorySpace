@@ -7,6 +7,7 @@ const removeAlarm = (memoNav) => {
 };
 const addAlarm = () => {
   const memoNav = document.querySelector('.memo-nav');
+  // deleteBtn, space, saveBtn, space => 4개
   if (memoNav.childNodes.length !== 4) return;
   const alarm = document.createElement('span');
   alarm.classList.add('savingMemoAlarm');

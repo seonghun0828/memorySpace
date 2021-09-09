@@ -2,7 +2,7 @@
   display: inline-block;
   position: relative;
 }
-.dropDown_menu {
+.dropDown-menu {
   display: none;
   position: absolute;
   font-size: 2rem;
@@ -13,7 +13,9 @@
   background-color: white;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
-.dropDown_element {
+.dropDown-book,
+.dropDown-movie,
+.dropDown-browser {
   margin: 1vh 0;
   cursor: pointer;
 }
