@@ -1,128 +1,11 @@
-import React, { useRef, createContext, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { Functions } from '../body/Functions';
 import './Search.css';
 
 const showOrHide = (menu) => {
   const checking = () => menu.current.classList.toggle('show');
   return checking;
 };
-
-const clickHandler = (event) => {
-  const editMenu = document.querySelector('.edit-menu');
-  if (!editMenu) return;
-  // 이미 어느 img가 클릭 되어 edit menu가 보이는 상태면 함수 종료
-  if (!editMenu.classList.contains('invisible')) return;
-  event.target.parentNode.appendChild(editMenu);
-  event.target.classList.toggle('clicked-img');
-  editMenu.classList.toggle('invisible');
-};
-// const saveMemo = () => {
-//   const book_data = JSON.parse(localStorage.getItem('book'));
-//   const movie_data = JSON.parse(localStorage.getItem('movie'));
-//   const targetImg = document.querySelector('.clicked-img');
-//   const contents = document.querySelector('.contents-div');
-//   const memoSpace = document.querySelector('.memo-space').children[0];
-//   if (!targetImg || !contents) return;
-//   if (contents.children[0].classList.contains('book-div')) {
-//     const index = Object.keys(book_data).find(
-//       (key) => book_data[key].id === parseInt(targetImg.id)
-//     );
-//     console.log(memoSpace.value);
-//     book_data[index].memo = memoSpace.value;
-//     bookList = book_data;
-//     saveImg('book', bookList);
-//   } else {
-//     const index = Object.keys(movie_data).find(
-//       (key) => movie_data[key].id === parseInt(targetImg.id)
-//     );
-//     movie_data[index].memo = memoSpace.value;
-//     movieList = movie_data;
-//     saveImg('movie', movieList);
-//   }
-// };
-
-const addMovie = (img_url, movieList) => {
-  let id_num;
-  if (movieList.length === 0) id_num = 0;
-  else id_num = movieList[movieList.length - 1].id + 1;
-  const contents = document.querySelector('.contents-div');
-  if (!contents) return;
-  const movieDiv = contents.children[0];
-  const newDiv = document.createElement('div');
-  const newImg = document.createElement('img');
-  newDiv.appendChild(newImg);
-  newDiv.classList.add('img-div');
-  newImg.id = id_num;
-  newImg.src = img_url;
-  newImg.classList.add('movie-img');
-  newImg.addEventListener('click', clickHandler);
-  const obj = {
-    id: id_num,
-    data: img_url,
-    memo: '',
-  };
-  movieList.push(obj);
-  saveImg('movie', movieList);
-  movieDiv.appendChild(newDiv);
-};
-
-const addBook = (img_url, bookList) => {
-  let id_num;
-  if (bookList.length === 0) id_num = 0;
-  else id_num = bookList[bookList.length - 1].id + 1;
-  const contents = document.querySelector('.contents-div');
-  if (!contents) return;
-  const bookDiv = contents.children[0];
-  const newDiv = document.createElement('div');
-  const newImg = document.createElement('img');
-  newDiv.appendChild(newImg);
-  newDiv.classList.add('img-div');
-  newImg.id = id_num;
-  newImg.src = img_url;
-  newImg.classList.add('book-img');
-  newImg.addEventListener('click', clickHandler);
-  const obj = {
-    id: id_num,
-    data: img_url,
-    memo: '',
-  };
-  bookList.push(obj);
-  saveImg('book', bookList);
-  bookDiv.appendChild(newDiv);
-};
-const saveImg = (arg, list) => {
-  const category = arg === 'book' ? 'book' : 'movie';
-  localStorage.setItem(category, JSON.stringify(list));
-};
-
-// const loadImg = () => {
-//   const contents = document.querySelector('.contents-div');
-//   if (!contents) return;
-//   const content = contents.children[0]; // book-div or movie-div
-//   let newId = 0;
-//   if (content.classList.contains('book-div')) {
-//     const book_data = JSON.parse(localStorage.getItem('book'));
-//     let newBookList = [];
-//     if (book_data !== null) {
-//       book_data.forEach((a) => {
-//         addBook(a.data, a.memo, newBookList, newId);
-//       });
-//     }
-//   }
-//   if (content.classList.contains('movie-div')) {
-//     const movie_data = JSON.parse(localStorage.getItem('movie'));
-//     let newMovieList = [];
-//     if (movie_data !== null) {
-//       movie_data.forEach((a) => {
-//         addMovie(a.data, a.memo, newMovieList, newId);
-//       });
-//     }
-//   }
-//   console.log('newlist: ', newBookList); // 왜 빈 리스트가 아니냐?
-//   console.log('newlist: ', newMovieList); // 왜 빈 리스트가 아니냐?
-// if (!memoBtn) return;
-// memoBtn.addEventListener('click', openMemo);
-// deleteBtn.addEventListener('click', deleteImg);
-// };
 
 window.onclick = (event) => {
   const searchBtn = document.querySelector('.search-icon');
@@ -158,12 +41,12 @@ const useBrowser = () => {
         if (content.classList.contains('book-div')) {
           let bookList = JSON.parse(localStorage.getItem('book'));
           if (!bookList) bookList = [];
-          addBook(reader.result, bookList);
+          Functions().addBook(reader.result, bookList, '');
         }
         if (content.classList.contains('movie-div')) {
           let movieList = JSON.parse(localStorage.getItem('movie'));
           if (!movieList) movieList = [];
-          addMovie(reader.result, movieList);
+          Functions().addMovie(reader.result, movieList, '');
         }
       };
       reader.readAsDataURL(file);
@@ -178,36 +61,21 @@ const useBrowser = () => {
   return { element, clickbrowser };
 };
 
-const loadFunction = {
-  // loadImg,
-  // saveMemo,
-  clickHandler,
-  addBook,
-  addMovie,
-};
-
-export const LoadFunctionContext = createContext(loadFunction);
-
 const Search = () => {
   const { element, clickbrowser } = useBrowser();
   const dropDown_menu = useRef();
   const checking = showOrHide(dropDown_menu);
-
   return (
     <div className="dropDown">
-      {/* <LoadFunctionContext.Provider
-        value={loadFunction}
-      ></LoadFunctionContext.Provider> */}
-
       <input type="file" id="file-browser" ref={element} />
       <button className="nav-icon search-icon" onClick={checking}>
         🔍
       </button>
       <div className="dropDown-menu" ref={dropDown_menu}>
-        <div className="dropDown-book">네이버북</div>
-        <div className="dropDown-movie">네이버영화</div>
+        <div className="dropDown-book">책 검색</div>
+        <div className="dropDown-movie">영화 검색</div>
         <div className="dropDown-browser" onClick={clickbrowser}>
-          내컴퓨터
+          내 컴퓨터
         </div>
       </div>
     </div>

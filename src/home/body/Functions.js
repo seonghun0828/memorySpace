@@ -93,6 +93,8 @@ const loadImg = () => {
 const funcs = {
   loadImg,
   saveImg,
+  addBook,
+  addMovie,
 };
 
 export const Functions = () => {

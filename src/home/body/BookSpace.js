@@ -7,15 +7,19 @@ import axios from 'axios';
 
 const getApi = async () => {
   const key = '45fe65b5c3fbd3d400ad5daa0f415552';
-  const res = await axios.get('https://dapi.kakao.com/v3/search/book', {
+  const {
+    data: { documents },
+  } = await axios.get('https://dapi.kakao.com/v3/search/book', {
     params: {
-      query: '경제',
+      query: '원피스 15권',
     },
     headers: {
       Authorization: 'KakaoAK ' + key,
     },
   });
-  console.log(res.data.documents);
+  console.log(documents);
+  const book_data = JSON.parse(localStorage.getItem('book'));
+  Functions().addBook(documents[0].thumbnail, book_data, '');
 };
 
 const deleteImg = () => {
