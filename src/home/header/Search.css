@@ -61,8 +61,12 @@
   background-color: rgb(218, 218, 218);
   /* border-left: 1px solid grey; */
 /* } */
-.invisible {
+/* .invisible {
   display: none;
+} */
+.searchText {
+  width: 15vw;
+  height: 4vh;
 }
 /* .memo-nav {
   padding-left: 1rem;

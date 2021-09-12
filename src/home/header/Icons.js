@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Search from './Search';
+import { SearchText } from './SearchText';
 import './Icons.css';
 
 const Icons = () => {
   return (
     <div className="nav-icons">
+      <SearchText />
       <Search />
       <Link to="./book">
         <span className="nav-icon book-icon">📚</span>

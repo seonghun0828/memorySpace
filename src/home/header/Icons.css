@@ -1,9 +1,13 @@
 .nav-icons {
   display: flex;
+  align-items: center;
+}
+.searchText {
+  margin-right: 0.5rem;
 }
 .nav-icon {
   position: relative;
-  margin-right: 2rem;
+  margin-right: 2vw;
   font-size: 3rem;
   cursor: pointer;
 }

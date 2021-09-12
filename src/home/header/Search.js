@@ -67,7 +67,7 @@ const Search = () => {
   const checking = showOrHide(dropDown_menu);
   return (
     <div className="dropDown">
-      <input type="text"></input>
+      {/* <input type="text" className="searchText"></input> */}
       <input type="file" id="file-browser" ref={element} />
       <button className="nav-icon search-icon" onClick={checking}>
         🔍
