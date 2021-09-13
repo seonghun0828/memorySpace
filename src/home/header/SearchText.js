@@ -1,26 +1,53 @@
 import React, { useEffect, useRef } from 'react';
+import { Functions } from '../body/Functions';
 import axios from 'axios';
 
-const getApi = async (text) => {
+const addImg = (img, search) => {
+  const book_data = JSON.parse(localStorage.getItem('book'));
+  removeBackground();
+  Functions().addBook(img, book_data, '');
+  search.value = '';
+};
+
+const removeBackground = () => {
+  const background = document.querySelector('.background');
+  if (background) background.parentNode.removeChild(background);
+};
+
+const getApi = async (search) => {
+  removeBackground();
   const key = '45fe65b5c3fbd3d400ad5daa0f415552';
   const {
     data: { documents },
   } = await axios.get('https://dapi.kakao.com/v3/search/book', {
     params: {
-      query: text,
+      query: search.value,
+      size: 3,
       // query: searchText.value,
     },
     headers: {
       Authorization: 'KakaoAK ' + key,
     },
   });
-  console.log(documents);
   const content = document.querySelector('.contents-div').children[0];
-  const background = document.createElement('img');
-  background.classList.add('blurred');
+  const background = document.createElement('div');
+  const blurImg = document.createElement('img');
+  background.appendChild(blurImg);
+  background.classList.add('background');
+  blurImg.classList.add('blurImg');
   content.insertBefore(background, content.firstChild);
-  // const book_data = JSON.parse(localStorage.getItem('book'));
-  // Functions().addBook(documents[0].thumbnail, book_data, '');
+  documents.forEach((ele) => {
+    const div = document.createElement('div');
+    div.classList.add('preview');
+    const img = document.createElement('img');
+    const text = document.createElement('span');
+    div.appendChild(img);
+    div.appendChild(text);
+    img.src = ele.thumbnail;
+    img.addEventListener('click', () => addImg(ele.thumbnail, search));
+    text.innerText = ele.title;
+    background.appendChild(div);
+  });
 };
 
 const showSearch = (target) => {
@@ -29,9 +56,9 @@ const showSearch = (target) => {
   const dropDown = document.querySelector('.dropDown-menu');
   //   console.log(d);
   current.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') getApi(current.value);
+    if (e.key === 'Enter') getApi(current);
   });
-  current.value = '';
+  current.focus();
 };
 export const SearchText = () => {
   const target = useRef();
