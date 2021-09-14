@@ -46,6 +46,7 @@ const useBrowser = () => {
         if (content.classList.contains('movie-div')) {
           let movieList = JSON.parse(localStorage.getItem('movie'));
           if (!movieList) movieList = [];
+          console.log('read', movieList);
           Functions().addMovie(reader.result, movieList, '');
         }
       };

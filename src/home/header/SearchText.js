@@ -3,7 +3,8 @@ import { Functions } from '../body/Functions';
 import axios from 'axios';
 
 const addImg = (img, search) => {
-  const book_data = JSON.parse(localStorage.getItem('book'));
+  let book_data = JSON.parse(localStorage.getItem('book'));
+  if (!book_data) book_data = [];
   removeBackground();
   Functions().addBook(img, book_data, '');
   search.value = '';
@@ -23,7 +24,6 @@ const getApi = async (search) => {
     params: {
       query: search.value,
       size: 3,
-      // query: searchText.value,
     },
     headers: {
       Authorization: 'KakaoAK ' + key,
