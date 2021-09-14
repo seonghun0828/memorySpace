@@ -3,6 +3,7 @@ import { Functions } from '../body/Functions';
 import axios from 'axios';
 
 const addImg = (img, search) => {
+  console.log('바뀜');
   let book_data = JSON.parse(localStorage.getItem('book'));
   if (!book_data) book_data = [];
   removeBackground();
