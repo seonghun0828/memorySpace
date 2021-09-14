@@ -33,6 +33,7 @@
 }
 .preview img {
   border: 0.1rem solid rgb(209, 209, 209);
+  cursor: pointer;
 }
 .preview span {
   font-size: 2rem;
