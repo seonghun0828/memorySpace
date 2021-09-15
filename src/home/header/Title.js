@@ -6,7 +6,11 @@ const Title = () => {
   return (
     <Link to="./">
       <div className="nav-title">
-        <img src="./memory-icon.png" alt="memo-icon" className="memory-icon" />
+        <img
+          src="images/memory-icon.png"
+          alt="memo-icon"
+          className="memory-icon"
+        />
         <span className="page-name">Memory Space</span>
       </div>
     </Link>

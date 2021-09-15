@@ -3,33 +3,7 @@ import { Route } from 'react-router-dom';
 import { Home, BookSpace, MovieSpace, CalendarSpace, MemoSpace } from './';
 import './Spaces.css';
 
-// const useBring = () => {
-//   const loadFunction = useContext(LoadFunctionContext);
-//   useEffect(() => {
-//     loadFunction.loadImg();
-//   }, []);
-// };
-
-// const contents = {
-//   content: '',
-// };
-
-// const useTake = () => {
-//   const target = useRef();
-
-//   useEffect(() => {
-//     contents.content = target;
-//   }, []);
-//   return { target };
-// };
-
-// export const ContentsContext = createContext(null);
-
 const Spaces = () => {
-  // addBook();
-  // useBring();
-  // const { target } = useTake();
-  // <ContentsContext.Provider value={target}></ContentsContext.Provider>;
   return (
     <div className="contents-div">
       <Route exact path="/" component={Home}></Route>

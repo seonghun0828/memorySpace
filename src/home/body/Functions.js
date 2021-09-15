@@ -7,6 +7,7 @@ const clickHandler = (event) => {
   event.target.classList.toggle('clicked-img');
   editMenu.classList.toggle('invisible');
   const contentsDiv = event.target.parentNode.parentNode.parentNode;
+  // clicked id 임시방편 나중에 바꾸기
   contentsDiv.clicked_id = event.target.id;
 };
 

@@ -15,6 +15,7 @@
 }
 .memo-nav .save-btn,
 .close-btn {
+  width: 1.5rem;
   cursor: pointer;
 }
 .savingMemoAlarm {

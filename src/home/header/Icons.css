@@ -17,7 +17,8 @@
 #file-browser {
   display: none;
 }
-.search-icon {
+.searchIcon,
+.browseIcon {
   background: none;
   border: none;
   padding: 0;

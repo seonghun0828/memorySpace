@@ -50,6 +50,7 @@ const MemoSpace = (props) => {
   const prop_state = props.location.state;
   const category = prop_state.category;
   useEffect(() => {
+    // clicked id 임시방편 나중에 바꾸기
     const id = document.querySelector('.contents-div').clicked_id;
     const saveBtn = document.querySelector('.save-btn');
     readMemo(category, id);
@@ -60,10 +61,16 @@ const MemoSpace = (props) => {
     <div className="memo-div">
       <div className="memo-nav">
         <span className="close-btn" onClick={props.history.goBack}>
-          ☒
+          <img
+            src="images/close-button.png"
+            alt="close"
+            className="close-btn"
+          />
         </span>
         &nbsp;&nbsp;
-        <span className="save-btn">☑︎</span>
+        <span className="save-btn">
+          <img src="images/check-mark.png" alt="save" className="save-btn" />
+        </span>
         &nbsp;&nbsp;
       </div>
       <div className="memo-space">

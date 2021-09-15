@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Functions } from '../body/Functions';
 import axios from 'axios';
 
 const addImg = (img, search) => {
-  console.log('바뀜');
   let book_data = JSON.parse(localStorage.getItem('book'));
   if (!book_data) book_data = [];
   removeBackground();
@@ -16,17 +15,23 @@ const removeBackground = () => {
   if (background) background.parentNode.removeChild(background);
 };
 
-const getApi = async (searchText, category) => {
+const getApi = async (searchText) => {
   removeBackground();
   let apiData;
-  if (category === 'book') {
+  if (
+    searchText.value === '' ||
+    searchText.value.replace(/^\s+|\s+$/g, '') === ''
+  )
+    return;
+  const category = document.querySelector('.contents-div').children[0];
+  if (category.classList.contains('book-div')) {
     const key = '45fe65b5c3fbd3d400ad5daa0f415552';
     const {
       data: { documents },
     } = await axios.get('https://dapi.kakao.com/v3/search/book', {
       params: {
         query: searchText.value,
-        size: 3,
+        size: 10,
       },
       headers: {
         Authorization: 'KakaoAK ' + key,
@@ -56,7 +61,7 @@ const getApi = async (searchText, category) => {
   background.classList.add('background');
   blurImg.classList.add('blurImg');
   content.insertBefore(background, content.firstChild);
-  if (category === 'book') {
+  if (category.classList.contains('book-div')) {
     apiData.forEach((ele) => {
       const div = document.createElement('div');
       div.classList.add('preview');
@@ -86,28 +91,25 @@ const getApi = async (searchText, category) => {
   // }
 };
 
-const showSearch = (target, category) => {
-  const { current } = target;
-  current.classList.toggle('invisible');
-  //   const dropDown = document.querySelector('.dropDown-menu');
-  current.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') getApi(current, category);
-  });
-  current.focus();
-};
 export const SearchText = () => {
-  const target = useRef();
   useEffect(() => {
-    const searchBook = document.querySelector('.dropDown-book');
-    const searchMovie = document.querySelector('.dropDown-movie');
-    searchBook.addEventListener('click', () => showSearch(target, 'book'));
-    searchMovie.addEventListener('click', () => showSearch(target, 'movie'));
+    const searchText = document.querySelector('.searchText');
+    const searchIcon = document.querySelector('.searchIcon');
+    searchText.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') getApi(searchText);
+    });
+    searchIcon.addEventListener('click', () => getApi(searchText));
     return () => {
-      searchBook.removeEventListener('click', () => showSearch(target));
-      searchMovie.removeEventListener('click', () => showSearch(target));
+      searchText.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') getApi(searchText);
+      });
+      searchIcon.removeEventListener('click', () => getApi(searchText));
     };
   });
   return (
-    <input type="text" className="searchText invisible" ref={target}></input>
+    <>
+      <input type="text" className="searchText"></input>
+      <button className="nav-icon searchIcon">🔍</button>
+    </>
   );
 };
