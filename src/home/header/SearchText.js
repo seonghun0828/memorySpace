@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { Functions } from '../body/Functions';
 import axios from 'axios';
 
-const addImg = (img, search) => {
-  let book_data = JSON.parse(localStorage.getItem('book'));
-  if (!book_data) book_data = [];
+const addImg = (img, search, cateory) => {
+  let data = JSON.parse(localStorage.getItem(cateory));
+  if (!data) data = [];
   removeBackground();
-  Functions().addBook(img, book_data, '');
+  if (cateory === 'book') Functions().addBook(img, data, '');
+  if (cateory === 'movie') Functions().addMovie(img, data, '');
   search.value = '';
 };
 
@@ -38,22 +39,28 @@ const getApi = async (searchText) => {
       },
     });
     apiData = documents;
+  } else {
+    const movieKey = 'N302VQA0TU4N37070EE4';
+    const {
+      data: {
+        Data: {
+          0: { Result },
+        },
+      },
+    } = await axios.get(
+      'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=N302VQA0TU4N37070EE4',
+      {
+        params: {
+          detail: 'Y',
+          ServiceKey: movieKey,
+          listCount: 10,
+          query: searchText.value,
+        },
+      }
+    );
+    apiData = Result;
+    if (!apiData) return;
   }
-  //   else {
-  // const movieKey = 'ba3df35e-a977-4146-b14a-d57e13e0cfa8';
-  // const data = await axios.get(
-  //   'http://api.kcisa.kr/openapi/service/rest/meta14/getKMPC031801',
-  //   {
-  //     params: {
-  //       serviceKey: movieKey,
-  //       numOfRows: 3,
-  //       title: searchText.value,
-  //     },
-  //   }
-  // );
-  // apiData = movieList;
-  // console.log(data.data.response.body.items.item);
-  //   }
   const content = document.querySelector('.contents-div').children[0];
   const background = document.createElement('div');
   const blurImg = document.createElement('img');
@@ -61,6 +68,7 @@ const getApi = async (searchText) => {
   background.classList.add('background');
   blurImg.classList.add('blurImg');
   content.insertBefore(background, content.firstChild);
+
   if (category.classList.contains('book-div')) {
     apiData.forEach((ele) => {
       const div = document.createElement('div');
@@ -70,25 +78,29 @@ const getApi = async (searchText) => {
       div.appendChild(img);
       div.appendChild(text);
       img.src = ele.thumbnail;
-      img.addEventListener('click', () => addImg(ele.thumbnail, searchText));
+      img.addEventListener('click', () =>
+        addImg(ele.thumbnail, searchText, 'book')
+      );
       text.innerText = ele.title;
       background.appendChild(div);
     });
+  } else {
+    apiData.forEach((ele) => {
+      const poster = ele.posters.split('|')[0];
+      const title = ele.title.replace(/!HS\s|!HE\s/g, '');
+      if (poster === '') return;
+      const div = document.createElement('div');
+      div.classList.add('preview');
+      const img = document.createElement('img');
+      const text = document.createElement('span');
+      div.appendChild(img);
+      div.appendChild(text);
+      img.src = poster;
+      img.addEventListener('click', () => addImg(poster, searchText, 'movie'));
+      text.innerText = title;
+      background.appendChild(div);
+    });
   }
-  // else {
-  //   apiData.forEach((ele) => {
-  //     const div = document.createElement('div');
-  //     div.classList.add('preview');
-  //     const img = document.createElement('img');
-  //     const text = document.createElement('span');
-  //     div.appendChild(img);
-  //     div.appendChild(text);
-  //     img.src = ele.thumbnail;
-  //     img.addEventListener('click', () => addImg(ele.thumbnail, searchText));
-  //     text.innerText = ele.title;
-  //     background.appendChild(div);
-  //   });
-  // }
 };
 
 export const SearchText = () => {
