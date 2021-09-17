@@ -1,19 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import { Functions } from '../body/Functions';
-import './Search.css';
-
-// const showOrHide = (menu) => {
-//   const checking = () => menu.current.classList.toggle('show');
-//   return checking;
-// };
+import './Navigation';
 
 window.onclick = (event) => {
-  const searchBtn = document.querySelector('.search-icon');
-  // const dropDown = document.querySelector('.dropDown-menu');
   const targetImg = document.querySelector('.clicked-img');
   const editMenu = document.querySelector('.edit-menu');
-  if (!searchBtn) return;
-  // if (event.target !== searchBtn) dropDown.classList.remove('show');
   if (!editMenu) return;
   const editMenuArr = [editMenu, editMenu.children[0], editMenu.children[1]];
   const isClickEditMenu = editMenuArr.some((ele) => ele === event.target);
@@ -63,21 +54,12 @@ const useBrowser = () => {
 
 const Search = () => {
   const { element, clickbrowser } = useBrowser();
-  // const dropDown_menu = useRef();
-  // const checking = showOrHide(dropDown_menu);
   return (
     <div className="dropDown">
       <input type="file" id="file-browser" ref={element} />
       <button className="nav-icon browseIcon" onClick={clickbrowser}>
         📂
       </button>
-      {/* <div className="dropDown-menu" ref={dropDown_menu}>
-        <div className="dropDown-book">책 검색</div>
-        <div className="dropDown-movie">영화 검색</div>
-        <div className="dropDown-browser">
-          내 컴퓨터
-        </div>
-      </div> */}
     </div>
   );
 };

@@ -7,12 +7,32 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.img-div {
+  display: inline-block;
+  position: relative;
+  width: 11rem;
+  height: 16rem;
+  margin: 0.7rem;
+}
+.book-img,
+.movie-img {
+  width: 100%;
+  height: 100%;
+  /* position: absolute; */
+  border: 0.1rem solid rgb(209, 209, 209);
+  z-index: 1;
+}
+.clicked-img {
+  z-index: 1;
+  transition-duration: 0.5s;
+  -webkit-filter: blur(1px) opacity(0.3) drop-shadow(0 0 0 white);
+  filter: blur(1px) opacity(0.3) drop-shadow(0 0 0 white);
+}
 .invisible {
   display: none;
 }
 .background {
   position: absolute;
-  /* z-index: 100; */
   width: 100%;
   height: 100%;
 }
@@ -22,10 +42,8 @@
   width: 100%;
   height: 100%;
   background-color: white;
-  /* -webkit-filter: opacity(0.7) drop-shadow(0 0 0 white); */
   filter: opacity(0.7) drop-shadow(0 0 0 white);
 }
-
 .preview {
   position: relative;
   z-index: 101;
@@ -38,4 +56,15 @@
 .preview span {
   font-size: 2rem;
   font-weight: bold;
+}
+/* 휴대용 디바이스 */
+@media screen and (max-width: 768px) {
+  .img-div {
+    width: 22.8vw;
+    height: 33vw;
+    margin: 1vw;
+  }
+  .edit-menu {
+    font-size: 5vw;
+  }
 }

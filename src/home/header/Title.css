@@ -14,3 +14,14 @@ a {
   color: inherit;
   text-decoration: none;
 }
+/* 휴대용 디바이스 */
+@media screen and (max-width: 768px) {
+  .memory-icon {
+    width: 3.5vw;
+    height: 4.1vw;
+    margin-right: 1vw;
+  }
+  .page-name {
+    font-size: 4vw;
+  }
+}

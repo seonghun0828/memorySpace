@@ -6,3 +6,16 @@
   justify-content: space-between;
   align-items: center;
 }
+.searchText {
+  width: 15vw;
+  height: 4vh;
+  margin-right: 1vw;
+}
+/* 휴대용 디바이스 */
+@media screen and (max-width: 768px) {
+  .searchText {
+    width: 20vw;
+    height: 5vw;
+    margin-right: 1vw;
+  }
+}

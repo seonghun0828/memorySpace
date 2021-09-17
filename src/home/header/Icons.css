@@ -26,3 +26,10 @@
 a {
   text-decoration: none;
 }
+/* 휴대용 디바이스 */
+@media screen and (max-width: 768px) {
+  .nav-icon {
+    margin-right: 1vw;
+    font-size: 5vw;
+  }
+}
