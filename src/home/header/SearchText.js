@@ -40,26 +40,22 @@ const getApi = async (searchText) => {
     });
     apiData = documents;
   } else {
-    const movieKey = 'N302VQA0TU4N37070EE4';
-    const {
-      data: {
-        Data: {
-          0: { Result },
-        },
-      },
-    } = await axios.get(
-      'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=N302VQA0TU4N37070EE4',
+    const clientId = 'IbndeLcL_SuBUeSSKnlx';
+    const clientSecret = 'USIUkFnmuv';
+    const data = await axios.get(
+      'https://openapi.naver.com/v1/search/movie.json',
       {
         params: {
-          detail: 'Y',
-          ServiceKey: movieKey,
-          listCount: 10,
+          'X-Naver-Client-Id': clientId,
+          'X-Naver-Client-Secret': clientSecret,
+          display: 10,
           query: searchText.value,
         },
       }
     );
-    apiData = Result;
-    if (!apiData) return;
+    console.log(data);
+    // apiData = Result;
+    // if (!apiData) return;
   }
   const content = document.querySelector('.contents-div').children[0];
   const background = document.createElement('div');

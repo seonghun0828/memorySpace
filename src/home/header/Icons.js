@@ -9,7 +9,6 @@ const Icons = () => {
     <div className="nav-icons">
       <SearchText />
       <Search />
-      <br />
       <Link to="./book">
         <span className="nav-icon book-icon">📚</span>
       </Link>
