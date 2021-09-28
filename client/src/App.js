@@ -10,6 +10,20 @@ import './App.css';
 const App = () => {
   return (
     <>
+      <button
+        type="button"
+        onClick={() => {
+          fetch('/api/data')
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              console.log(data);
+            });
+        }}
+      >
+        get data
+      </button>
       <Navigation></Navigation>
       <Spaces></Spaces>
     </>
