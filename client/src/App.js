@@ -1,4 +1,5 @@
 import React from 'react'; // {Component}
+import axios from 'axios';
 // import { Route, Switch } from 'react-router-dom';
 import Navigation from './home/header/Navigation';
 import Spaces from './home/body/Spaces';
@@ -12,14 +13,12 @@ const App = () => {
     <>
       <button
         type="button"
-        onClick={() => {
-          fetch('/api/data')
-            .then((res) => {
-              return res.json();
-            })
-            .then((data) => {
-              console.log(data);
-            });
+        onClick={async () => {
+          console.log(await axios.get('http://localhost:5000/api/data'));
+          const data = await axios.get('http://localhost:5000/api/data', {
+            params: { query: 'jojo' },
+          });
+          console.log(data);
         }}
       >
         get data
