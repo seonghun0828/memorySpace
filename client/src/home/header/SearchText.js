@@ -46,7 +46,6 @@ const getApi = async (searchText) => {
     } = await axios.get('http://localhost:5000/api/data', {
       params: { query: searchText.value },
     });
-    console.log(items);
     apiData = items;
     if (!apiData) return;
   }

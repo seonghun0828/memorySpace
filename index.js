@@ -17,6 +17,7 @@ app.use('/api/data', (req, res) => {
       headers: {
         'X-Naver-Client-Id': clientId,
         'X-Naver-Client-Secret': clientSecret,
+        'Access-Control-Allow-Private-Network': true,
         'Access-Control-Allow-Origin': '*',
       },
     })
