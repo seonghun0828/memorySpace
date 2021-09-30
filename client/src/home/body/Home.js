@@ -13,7 +13,7 @@ const Home = () => {
       searchIcon.classList.toggle('invisible');
       fileBrowser.classList.toggle('invisible');
     };
-    toggle();
+    if (!searchText.classList.contains('invisible')) toggle();
     bookIcon.addEventListener('click', toggle);
     movieIcon.addEventListener('click', toggle);
     calendarIcon.addEventListener('click', toggle);
