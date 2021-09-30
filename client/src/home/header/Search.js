@@ -55,7 +55,7 @@ const useBrowser = () => {
 const Search = () => {
   const { element, clickbrowser } = useBrowser();
   return (
-    <div className="dropDown">
+    <div className="fileBrowser">
       <input type="file" id="file-browser" ref={element} />
       <button className="nav-icon browseIcon" onClick={clickbrowser}>
         📂

@@ -4,9 +4,20 @@ import Search from './Search';
 import { SearchText } from './SearchText';
 import './Icons.css';
 
+// const useSearchText = () => {
+//   const history = useHistory();
+//   console.log(history.location);
+//   if (history.location.pathname !== '/') {
+//     return <SearchText />;
+//   }
+// };
+
 const Icons = () => {
+  // const showSearchText = useSearchText();
+  // console.log(showSearchText);
   return (
     <div className="nav-icons">
+      {/* {showSearchText} */}
       <SearchText />
       <Search />
       <Link to="./book">

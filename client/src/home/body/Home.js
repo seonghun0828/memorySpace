@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Home.css';
 const Home = () => {
+  useEffect(() => {
+    const searchText = document.querySelector('.searchText');
+    const searchIcon = document.querySelector('.searchIcon');
+    const fileBrowser = document.querySelector('.fileBrowser');
+    const bookIcon = document.querySelector('.book-icon');
+    const movieIcon = document.querySelector('.movie-icon');
+    const calendarIcon = document.querySelector('.calendar-icon');
+    const toggle = () => {
+      searchText.classList.toggle('invisible');
+      searchIcon.classList.toggle('invisible');
+      fileBrowser.classList.toggle('invisible');
+    };
+    toggle();
+    bookIcon.addEventListener('click', toggle);
+    movieIcon.addEventListener('click', toggle);
+    calendarIcon.addEventListener('click', toggle);
+    return () => {
+      bookIcon.removeEventListener('click', toggle);
+      movieIcon.removeEventListener('click', toggle);
+      calendarIcon.removeEventListener('click', toggle);
+    };
+  });
   return (
     <div className="homeNotice">
       <br />
