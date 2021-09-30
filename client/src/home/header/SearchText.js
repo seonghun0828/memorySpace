@@ -40,23 +40,17 @@ const getApi = async (searchText) => {
     });
     apiData = documents;
   } else {
-    const clientId = 'IbndeLcL_SuBUeSSKnlx';
-    const clientSecret = 'USIUkFnmuv';
-    const data = await axios.get(
-      'https://openapi.naver.com/v1/search/movie.json',
-      {
-        params: {
-          'X-Naver-Client-Id': clientId,
-          'X-Naver-Client-Secret': clientSecret,
-          display: 10,
-          query: searchText.value,
-        },
-      }
-    );
-    console.log(data);
-    // apiData = Result;
-    // if (!apiData) return;
+    // category === movie-div
+    const {
+      data: { items },
+    } = await axios.get('http://localhost:5000/api/data', {
+      params: { query: searchText.value },
+    });
+    console.log(items);
+    apiData = items;
+    if (!apiData) return;
   }
+
   const content = document.querySelector('.contents-div').children[0];
   const background = document.createElement('div');
   const blurImg = document.createElement('img');
@@ -82,8 +76,8 @@ const getApi = async (searchText) => {
     });
   } else {
     apiData.forEach((ele) => {
-      const poster = ele.posters.split('|')[0];
-      const title = ele.title.replace(/!HS\s|!HE\s/g, '');
+      const poster = ele.image;
+      const title = ele.title.replace(/<b>|<\/b>/g, '');
       if (poster === '') return;
       const div = document.createElement('div');
       div.classList.add('preview');
