@@ -41,26 +41,19 @@ const getApi = async (searchText) => {
     apiData = documents;
   } else {
     // category === movie-div
-    try {
-      const {
-        data: { items },
-      } = await axios.get('http://localhost:5000/api/data', {
-        params: { query: searchText.value },
-      });
-      apiData = items;
-      if (!apiData) return;
-    } catch (err) {
-      const p = document.createElement('p');
-      p.innerHTML = err;
-      document.querySelector('.movie-div').appendChild(p);
-    }
-    // const {
-    //   data: { items },
-    // } = await axios.get('http://localhost:5000/api/data', {
-    //   params: { query: searchText.value },
-    // });
-    // apiData = items;
-    // if (!apiData) return;
+    const {
+      data: { items },
+    } = await axios.get('http://localhost:5000/api/data', {
+      params: { query: searchText.value },
+    });
+    apiData = items;
+    const p = document.createElement('p');
+    p.innerHTML = items;
+    document.querySelector('.movie-div').appendChild(p);
+    const pp = document.createElement('p');
+    pp.innerHTML = searchText.value;
+    document.querySelector('.movie-div').appendChild(pp);
+    if (!apiData) return;
   }
 
   const content = document.querySelector('.contents-div').children[0];
