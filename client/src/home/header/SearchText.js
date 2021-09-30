@@ -94,13 +94,6 @@ const getApi = async (searchText) => {
 
 export const SearchText = () => {
   useEffect(() => {
-    if (
-      document
-        .querySelector('.contents-div')
-        .children[0].classList.contains('homeNotice')
-    ) {
-      return;
-    }
     const searchText = document.querySelector('.searchText');
     const searchIcon = document.querySelector('.searchIcon');
     searchText.addEventListener('keypress', (e) => {
