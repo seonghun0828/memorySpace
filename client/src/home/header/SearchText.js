@@ -40,19 +40,12 @@ const getApi = async (searchText) => {
     });
     apiData = documents;
   } else {
-    // category === movie-div
     const {
       data: { items },
-    } = await axios.get('http://localhost:5000/api/data', {
+    } = await axios.get('https://memory-space.herokuapp.com/api/data', {
       params: { query: searchText.value },
     });
     apiData = items;
-    const p = document.createElement('p');
-    p.innerHTML = items;
-    document.querySelector('.movie-div').appendChild(p);
-    const pp = document.createElement('p');
-    pp.innerHTML = searchText.value;
-    document.querySelector('.movie-div').appendChild(pp);
     if (!apiData) return;
   }
 
