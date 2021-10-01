@@ -5,7 +5,9 @@ const CalendarSpace = () => {
   return (
     <div className="calendar-div preparing">
       <br />
-      <h1>열심히 만들고 있습니다!</h1>
+      <br />
+      <br />
+      <h1>준비중입니다</h1>
     </div>
   );
 };

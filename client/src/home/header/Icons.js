@@ -16,7 +16,8 @@ const Icons = () => {
         <span className="nav-icon movie-icon">🎥</span>
       </Link>
       <Link to="./calendar">
-        <span className="nav-icon calendar-icon">🗓</span>
+        {/* 구현 후 invisible 삭제 */}
+        <span className="nav-icon calendar-icon invisible">🗓</span>
       </Link>
     </div>
   );
