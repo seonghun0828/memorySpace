@@ -5,3 +5,4 @@
 
 React로 클라이언트를, Express.js로 서버를 구성했습니다. 회원가입, 로그인 등의 불편함을 지우기 위해 페이지의 local storage에 자료를 저장하고 불러오는 방식을 이용했습니다.
 Heroku를 통해 배포하고 있습니다.
+<img width='80%' src='https://user-images.githubusercontent.com/31424628/135713585-33e2f2a2-99eb-4e93-9777-8ba236606d93.gif' />
