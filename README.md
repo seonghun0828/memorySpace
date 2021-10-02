@@ -7,3 +7,5 @@ React로 클라이언트를, Express.js로 서버를 구성했습니다. 회원�
 Heroku를 통해 배포하고 있습니다.
 <br/><br/>
 <img width='80%' src='https://user-images.githubusercontent.com/31424628/135713948-e2c51bae-58b3-479b-a735-977f31df0dee.gif' />
+<br/><br/>
+<img width='80%' src='https://user-images.githubusercontent.com/31424628/135714082-21cda74e-527f-4f24-8676-c8154f753702.gif' />
