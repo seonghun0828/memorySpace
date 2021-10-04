@@ -1,7 +1,7 @@
 # 📚 Memory Space 🎥
 
-<a target="_blank" rel="noreferrer noopener" href='https://memory-space.herokuapp.com/'>사이트로 이동하기</a><br/><br/>
-
+<a target="_blank" rel="noreferrer noopener" href='https://memory-space.herokuapp.com/'>사이트로 이동하기</a>
+<br/><br/>
 <img width='100%' src='https://user-images.githubusercontent.com/31424628/135713948-e2c51bae-58b3-479b-a735-977f31df0dee.gif' />
 <br/><br/>
 기억하고 싶은 사진 또는 책이나 영화를 메모와 함께 기억할 수 있게 해주는 웹사이트입니다. <br/>
