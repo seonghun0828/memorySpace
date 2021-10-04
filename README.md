@@ -1,6 +1,6 @@
 # 📚 Memory Space 🎥
 
-<a target="_blank" rel="noreferrer noopener" href='https://memory-space.herokuapp.com/'>사이트로 이동하기</a>
+<a href='https://memory-space.herokuapp.com/'>사이트로 이동하기</a>
 <br/><br/>
 <img width='100%' src='https://user-images.githubusercontent.com/31424628/135713948-e2c51bae-58b3-479b-a735-977f31df0dee.gif' />
 <br/><br/>
