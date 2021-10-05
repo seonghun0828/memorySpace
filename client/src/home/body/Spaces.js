@@ -5,7 +5,7 @@ import './Spaces.css';
 
 const Spaces = () => {
   return (
-    <div className="contents-div">
+    <div className="content-space">
       <Route exact path="/" component={Home}></Route>
       <Route path="/book" component={BookSpace}></Route>
       <Route path="/movie" component={MovieSpace}></Route>

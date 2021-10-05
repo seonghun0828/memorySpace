@@ -16,7 +16,7 @@ const MovieSpace = () => {
   }, []);
 
   return (
-    <div className="movie-div">
+    <div className="movie-space">
       <span className="edit-menu invisible">
         <Link
           to={{

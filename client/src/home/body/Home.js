@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import './Home.css';
 const Home = () => {
   useEffect(() => {
-    const searchText = document.querySelector('.searchText');
-    const searchIcon = document.querySelector('.searchIcon');
-    const fileBrowser = document.querySelector('.fileBrowser');
+    const searchText = document.querySelector('.search-text');
+    const searchIcon = document.querySelector('.search-icon');
+    const fileBrowser = document.querySelector('.file-browser');
     const bookIcon = document.querySelector('.book-icon');
     const movieIcon = document.querySelector('.movie-icon');
     const calendarIcon = document.querySelector('.calendar-icon');
@@ -24,7 +24,7 @@ const Home = () => {
     };
   });
   return (
-    <div className="homeNotice">
+    <div className="home-notice">
       <br />
       <h1>책이나 영화를 사진으로 저장해보세요.</h1>
       <br />

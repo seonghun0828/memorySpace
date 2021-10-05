@@ -10,16 +10,16 @@ const addAlarm = () => {
   // deleteBtn, space, saveBtn, space => 4개
   if (memoNav.childNodes.length !== 4) return;
   const alarm = document.createElement('span');
-  alarm.classList.add('savingMemoAlarm');
+  alarm.classList.add('save-memo-alarm');
   alarm.innerText = '저장되었습니다';
   memoNav.appendChild(alarm);
   setTimeout(() => removeAlarm(memoNav), 2000);
 };
 
 const saveMemo = (category, id) => {
-  const contents = document.querySelector('.contents-div');
+  const contentSpace = document.querySelector('.content-space');
   const memoSpace = document.querySelector('.memo-space').children[0];
-  if (!contents) return;
+  if (!contentSpace) return;
   if (category === 'book') {
     const book_data = JSON.parse(localStorage.getItem('book'));
     const index = Object.keys(book_data).find(
@@ -52,7 +52,7 @@ const MemoSpace = (props) => {
   const category = prop_state.category;
   useEffect(() => {
     // clicked id 임시방편 나중에 바꾸기
-    const id = document.querySelector('.contents-div').clicked_id;
+    const id = document.querySelector('.content-space').clicked_id;
     const saveBtn = document.querySelector('.save-btn');
     readMemo(category, id);
     saveBtn.addEventListener('click', () => saveMemo(category, id));

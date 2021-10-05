@@ -39,7 +39,7 @@ const BookSpace = () => {
   }, []);
 
   return (
-    <div className="book-div">
+    <div className="book-space">
       <span className="edit-menu invisible">
         <Link
           to={{

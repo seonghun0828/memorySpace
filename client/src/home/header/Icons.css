@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
 }
-.searchText {
+.search-text {
   margin-right: 0.5rem;
 }
 .nav-icon {
@@ -14,11 +14,11 @@
 .nav-icon:hover {
   background-color: rgb(233, 233, 233);
 }
-#file-browser {
+#browser {
   display: none;
 }
-.searchIcon,
-.browseIcon {
+.search-icon,
+.browser-icon {
   background: none;
   border: none;
   padding: 0;

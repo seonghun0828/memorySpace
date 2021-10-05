@@ -19,6 +19,7 @@ const useBrowser = () => {
   const element = useRef();
   const clickbrowser = () => element.current.click();
   const readFile = () => {
+    console.log('실행');
     const contents = document.querySelector('.contents-div');
     if (!contents) return;
     const content = contents.children[0]; // book-div or movie-div
@@ -55,9 +56,9 @@ const useBrowser = () => {
 const Search = () => {
   const { element, clickbrowser } = useBrowser();
   return (
-    <div className="fileBrowser">
-      <input type="file" id="file-browser" ref={element} />
-      <button className="nav-icon browseIcon" onClick={clickbrowser}>
+    <div className="file-browser">
+      <input type="file" id="browser" ref={element} />
+      <button className="nav-icon browser-icon" onClick={clickbrowser}>
         📂
       </button>
     </div>

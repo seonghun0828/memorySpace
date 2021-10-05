@@ -24,8 +24,8 @@ const getApi = async (searchText) => {
     searchText.value.replace(/^\s+|\s+$/g, '') === ''
   )
     return;
-  const category = document.querySelector('.contents-div').children[0];
-  if (category.classList.contains('book-div')) {
+  const category = document.querySelector('.content-space').children[0];
+  if (category.classList.contains('book-space')) {
     const key = '45fe65b5c3fbd3d400ad5daa0f415552';
     const {
       data: { documents },
@@ -49,15 +49,15 @@ const getApi = async (searchText) => {
     if (!apiData) return;
   }
 
-  const content = document.querySelector('.contents-div').children[0];
+  const content = document.querySelector('.content-space').children[0];
   const background = document.createElement('div');
   const blurImg = document.createElement('img');
   background.appendChild(blurImg);
   background.classList.add('background');
-  blurImg.classList.add('blurImg');
+  blurImg.classList.add('blur-img');
   content.insertBefore(background, content.firstChild);
 
-  if (category.classList.contains('book-div')) {
+  if (category.classList.contains('book-space')) {
     apiData.forEach((ele) => {
       const div = document.createElement('div');
       div.classList.add('preview');
@@ -93,8 +93,8 @@ const getApi = async (searchText) => {
 
 export const SearchText = () => {
   useEffect(() => {
-    const searchText = document.querySelector('.searchText');
-    const searchIcon = document.querySelector('.searchIcon');
+    const searchText = document.querySelector('.search-text');
+    const searchIcon = document.querySelector('.search-icon');
     searchText.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') getApi(searchText);
     });
@@ -108,8 +108,8 @@ export const SearchText = () => {
   });
   return (
     <>
-      <input type="text" className="searchText"></input>
-      <button className="nav-icon searchIcon">🔍</button>
+      <input type="text" className="search-text"></input>
+      <button className="nav-icon search-icon">🔍</button>
     </>
   );
 };
