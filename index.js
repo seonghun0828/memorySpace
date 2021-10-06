@@ -3,9 +3,15 @@ const app = express();
 const path = require('path');
 const axios = require('axios');
 const cors = require('cors');
-
+const fs = require('fs');
 app.use(cors());
 app.use(express.json()); // same as body-parser.json
+
+app.post('/book_info', (res, req) => {
+  console.log(res);
+  console.log(req);
+});
+console.log(require('./book_info'));
 
 app.use('/api/data', (req, res) => {
   const word = req.query.query;

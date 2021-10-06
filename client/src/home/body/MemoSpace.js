@@ -43,7 +43,6 @@ const readMemo = (category, id) => {
   const textArea = memoSpace.children[0];
   const data = JSON.parse(localStorage.getItem(category));
   const index = Object.keys(data).find((key) => data[key].id === parseInt(id));
-  console.log(id, data, index);
   textArea.value = data[parseInt(index)].memo;
 };
 
