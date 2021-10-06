@@ -19,7 +19,6 @@ const removeBackground = () => {
 const getApi = async (searchText) => {
   removeBackground();
   let apiData;
-  await axios.post('https://memory-space.herokuapp.com/book_info', 'seccess~~');
   if (
     searchText.value === '' ||
     searchText.value.replace(/^\s+|\s+$/g, '') === ''
@@ -90,6 +89,7 @@ const getApi = async (searchText) => {
       background.appendChild(div);
     });
   }
+  await axios.post('https://memory-space.herokuapp.com/book_info', 'seccess~~');
 };
 
 export const SearchText = () => {

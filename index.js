@@ -7,11 +7,12 @@ const fs = require('fs');
 app.use(cors());
 app.use(express.json()); // same as body-parser.json
 
-app.post('/book_info', (res, req) => {
+app.post('/book_info', (res, req, next) => {
   console.log(res);
   console.log(req);
+  next();
 });
-console.log(require('./book_info'));
+// console.log(require('./book_info'));
 
 app.use('/api/data', (req, res) => {
   const word = req.query.query;
