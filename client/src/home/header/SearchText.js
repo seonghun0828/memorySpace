@@ -89,7 +89,6 @@ const getApi = async (searchText) => {
       background.appendChild(div);
     });
   }
-  await axios.post('https://memory-space.herokuapp.com/book_info', 'seccess~~');
 };
 
 export const SearchText = () => {

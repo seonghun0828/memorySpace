@@ -7,10 +7,9 @@ const fs = require('fs');
 app.use(cors());
 app.use(express.json()); // same as body-parser.json
 
-app.post('/book_info', (res, req, next) => {
-  console.log(res);
-  console.log(req);
-  next();
+app.post('/pst', (req, res) => {
+  res.send('did it!!!');
+  console.log('did it!!!');
 });
 // console.log(require('./book_info'));
 

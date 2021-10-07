@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { DeleteImage } from './DeleteImage';
 import { Functions } from './Functions';
-// import axios from 'axios';
+import axios from 'axios';
 
 // const getApi = async () => {
 //   const searchText = document.querySelector('.searchText');
@@ -33,9 +33,6 @@ const deleteImg = () => {
 const BookSpace = () => {
   useEffect(() => {
     Functions().loadImg();
-    // const nBook = document.querySelector('.dropDown-book');
-    // nBook.addEventListener('click', getApi);
-    // return () => nBook.removeEventListener('click', getApi);
   }, []);
 
   return (
@@ -55,6 +52,9 @@ const BookSpace = () => {
           🗑
         </span>
       </span>
+      <form action="/pst" method="post">
+        <input type="submit" name="jojo" value="axios" />
+      </form>
     </div>
   );
 };
