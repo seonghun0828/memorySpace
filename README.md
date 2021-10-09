@@ -1,5 +1,22 @@
 # 📚 Memory Space 🎥
 
+## 목차
+- [프로젝트 소개](#프로젝트 소개)
+- [시연](#시연)
+- [사이트로 이동하기](https://memory-space.herokuapp.com/)
+
+## 프로젝트 소개
+기억하고 싶은 사진 또는 책이나 영화를 메모와 함께 기억할 수 있게 해주는 웹사이트입니다. <br/>
+오늘 하루를 담은 사진, 책 표지 또는 영화 포스터 등의 이미지를 보여주고 자기만의 소감을 기록할 수 있습니다.
+
+## 시연
+<br/><br/>
+<img width='100%' src='https://user-images.githubusercontent.com/31424628/135713948-e2c51bae-58b3-479b-a735-977f31df0dee.gif' />
+<br/><br/>
+<br/><br/><br/><br/>
+<img width='100%' src='https://user-images.githubusercontent.com/31424628/135714082-21cda74e-527f-4f24-8676-c8154f753702.gif' />
+
+
 <a href='https://memory-space.herokuapp.com/'>사이트로 이동하기</a>
 <br/><br/>
 <img width='100%' src='https://user-images.githubusercontent.com/31424628/135713948-e2c51bae-58b3-479b-a735-977f31df0dee.gif' />
