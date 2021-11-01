@@ -6,9 +6,12 @@ const clickHandler = (event) => {
   event.target.parentNode.appendChild(editMenu);
   event.target.classList.toggle('clicked-img');
   editMenu.classList.toggle('invisible');
-  const contentSpace = event.target.parentNode.parentNode.parentNode;
-  // clicked id 임시방편 나중에 바꾸기
-  contentSpace.clicked_id = event.target.id;
+};
+
+const saveId = (event) => {
+  const id = event.target.id;
+  if (id === '') return;
+  localStorage.setItem('id', JSON.stringify(id));
 };
 
 const addMovie = (img_url, movieList, img_memo) => {
@@ -96,6 +99,7 @@ const funcs = {
   saveImg,
   addBook,
   addMovie,
+  saveId,
 };
 
 export const Functions = () => {

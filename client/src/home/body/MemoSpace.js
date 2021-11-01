@@ -42,16 +42,14 @@ const readMemo = (category, id) => {
   const memoSpace = document.querySelector('.memo-space');
   const textArea = memoSpace.children[0];
   const data = JSON.parse(localStorage.getItem(category));
-  const index = Object.keys(data).find((key) => data[key].id === parseInt(id));
-  textArea.value = data[parseInt(index)].memo;
+  textArea.value = data[parseInt(id)].memo;
 };
 
 const MemoSpace = (props) => {
   const prop_state = props.location.state;
   const category = prop_state.category;
   useEffect(() => {
-    // clicked id 임시방편 나중에 바꾸기
-    const id = document.querySelector('.content-space').clicked_id;
+    const id = JSON.parse(localStorage.getItem('id'));
     const saveBtn = document.querySelector('.save-btn');
     readMemo(category, id);
     saveBtn.addEventListener('click', () => saveMemo(category, id));

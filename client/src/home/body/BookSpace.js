@@ -12,6 +12,8 @@ const deleteImg = () => {
 const BookSpace = () => {
   useEffect(() => {
     Functions().loadImg();
+    const bookSpace = document.querySelector('.book-space');
+    bookSpace.addEventListener('click', Functions().saveId);
   }, []);
 
   return (

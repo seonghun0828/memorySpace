@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import { LoadFunctionContext } from '../header/Search';
 import { Link } from 'react-router-dom';
 import { DeleteImage } from './DeleteImage';
 import { Functions } from './Functions';
@@ -13,6 +12,8 @@ const deleteImg = () => {
 const MovieSpace = () => {
   useEffect(() => {
     Functions().loadImg();
+    const movieSpace = document.querySelector('.movie-space');
+    movieSpace.addEventListener('click', Functions().saveId);
   }, []);
 
   return (
