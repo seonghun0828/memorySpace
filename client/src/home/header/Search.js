@@ -20,22 +20,23 @@ const useBrowser = () => {
   const clickbrowser = () => element.current.click();
   const readFile = () => {
     console.log('실행');
-    const contents = document.querySelector('.contents-div');
+    const contents = document.querySelector('.content-space');
     if (!contents) return;
-    const content = contents.children[0]; // book-div or movie-div
+    const content = contents.children[0]; // book-space or movie-space
     const file = element.current.files[0];
     if (!file) return;
+    console.log(content, file);
     if (!file.type.startsWith('image/') && file !== null)
       window.alert('이미지 파일만 선택해주십시오.');
     else {
       const reader = new FileReader();
       reader.onload = function () {
-        if (content.classList.contains('book-div')) {
+        if (content.classList.contains('book-space')) {
           let bookList = JSON.parse(localStorage.getItem('book'));
           if (!bookList) bookList = [];
           Functions().addBook(reader.result, bookList, '');
         }
-        if (content.classList.contains('movie-div')) {
+        if (content.classList.contains('movie-space')) {
           let movieList = JSON.parse(localStorage.getItem('movie'));
           if (!movieList) movieList = [];
           Functions().addMovie(reader.result, movieList, '');
